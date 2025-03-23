@@ -49,7 +49,7 @@ const LeaveForm = () => {
 
       {/* Centered & Smaller Submit Button */}
       <div className="flex justify-center mt-6">
-        <button className="bg-teal-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-teal-700">
+        <button className="bg-teal-600 text-white px-6 py-2 rounded-lg cursor-pointer text-sm font-medium hover:bg-teal-700">
           Submit
         </button>
       </div>

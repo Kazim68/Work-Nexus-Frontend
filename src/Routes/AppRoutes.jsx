@@ -6,7 +6,11 @@ import OrganizationInfo from '../Components/Auth/SignUp/OrganizationInfo';
 import SignIn from '../Components/Auth/SignIn/SignIn';
 import ForgotPassword from '../Components/Auth/SignIn/ForgotPassword';
 import RecoveredPassword from '../Components/Auth/SignIn/RecoveredPassword';
-import LeaveReview from '../../src/LeaveModule/ReviewLeave/LeaveReview';
+import LeaveReview from '../Components/LeaveModule/ReviewLeave/LeaveReview';
+import ApplyLeave from '../Components/LeaveModule/ApplyLeave/ApplyLeave';
+
+import PricingPlan from '../Components/Auth/SignUp/PricingPlan';
+import PaymentSetup from '../Components/Auth/SignUp/PaymentSetup';
 
 
 const AppRoutes = () => {
@@ -17,11 +21,20 @@ const AppRoutes = () => {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/verify" element={<OTPVerification />} />
                     <Route path="/orgInfo" element={<OrganizationInfo />} />
+                    <Route path="/pricing-plan" element={<PricingPlan />} />
+                    <Route path="/payment" element={<PaymentSetup />} />
+
+
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/recoverpassword" element={<RecoveredPassword />} />
                     <Route path="/recoverpassword" element={<RecoveredPassword />} />
-                    <Route path="/" element={<LeaveReview />} />
+
+
+                    <Route path="/apply-leave" element={<ApplyLeave />} />
+                    <Route path="/leave-review" element={<LeaveReview />} />
+                    
+                    
                     
                 </Routes>
             </BrowserRouter>
