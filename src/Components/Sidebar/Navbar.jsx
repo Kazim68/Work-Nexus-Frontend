@@ -9,11 +9,15 @@ const Navbar = ({ toggleSidebar }) => {
         <button onClick={toggleSidebar} className="text-2xl md:hidden">
           <MdMenu />
         </button>
-        <img src="/logo.png" alt="HRM Logo" className="h-10" />
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+            alt="HRM Logo"
+            className="w-10 h-10"
+          />
       </div>
       <div className="flex items-center space-x-3">
         <span className="text-gray-700">Hi, Malick Barr</span>
-        <img src="/profile.png" alt="Profile" className="w-10 h-10 rounded-full" />
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" className="w-10 h-10 rounded-full" />
       </div>
     </div>
   );
