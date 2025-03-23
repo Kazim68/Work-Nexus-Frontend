@@ -1,7 +1,7 @@
 import React from "react";
 import LeaveForm from "./LeaveForm";
 import Calendar from "./Calendar";
-import Layout from "../../Components/Sidebar/Layout";
+import Layout from "../../Layout/Layout";
 import LeaveReport from "./LeaveReport";
 import LeaveSummary from "./LeaveSummary";
 
@@ -10,7 +10,7 @@ const Dashboard = () => {
     <Layout>
       {/* Small & Medium Screens: Custom Order */}
       <div className="flex flex-col gap-6 md:hidden">
-        <Calendar />
+        {/* <Calendar /> */}
         <LeaveForm />
         <LeaveReport />
         <LeaveSummary />

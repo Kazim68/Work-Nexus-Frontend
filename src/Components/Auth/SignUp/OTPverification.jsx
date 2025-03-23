@@ -62,7 +62,7 @@ export default function OTPVerification() {
           Didn’t Receive? <span className="text-teal-600 font-medium cursor-pointer">Resend</span> <span className="font-semibold">60</span>
         </p>
         
-        <button onClick={verifyOtp} className="w-full bg-teal-600 text-white py-4 rounded-lg text-lg font-medium mt-6 hover:bg-teal-700">
+        <button onClick={verifyOtp} className="cursor-pointer w-full bg-teal-600 text-white py-4 rounded-lg text-lg font-medium mt-6 hover:bg-teal-700">
           Continue
         </button>
       </div>

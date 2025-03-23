@@ -33,7 +33,7 @@ const SginUp = () => {
                             <input type="password" placeholder="Enter your Password" className="w-full p-3  rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                         </div>
 
-                        <button onClick={signUp} type="submit" className="w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700">
+                        <button onClick={signUp} type="submit" className="cursor-pointer w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700">
                             Create Account →
                         </button>
                     </form>
@@ -49,11 +49,11 @@ const SginUp = () => {
                     </div>
 
                     <div className="flex gap-3">
-                        <button className="w-full flex items-center justify-center py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+                        <button className="cursor-pointer w-full flex items-center justify-center py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
                             <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" className="w-5 h-5 mr-2" />
                             Sign up with Google
                         </button>
-                        <button className="w-full flex items-center justify-center border-gray-400 py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
+                        <button className="cursor-pointer w-full flex items-center justify-center border-gray-400 py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
                             <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019.png" alt="Outlook" className="w-5 h-5 mr-2" />
                             Sign up With Outlook
                         </button>

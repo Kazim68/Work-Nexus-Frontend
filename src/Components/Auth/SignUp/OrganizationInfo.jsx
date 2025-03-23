@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const OrganizationInfo = () => {
-  const [image, setImage] = useState(null);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-    }
-  };
+  const navigate = useNavigate()
+  const handleOrgInfo = ()=>{
+
+    navigate('/pricing-plan')
+
+  }
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
@@ -16,7 +16,7 @@ const OrganizationInfo = () => {
         {/* Organization Logo Upload */}
         <div className="relative w-20 h-20 mx-auto mb-10">
           <img
-            src={image || "https://img.icons8.com/ios/100/000000/company.png"}
+            src={"https://img.icons8.com/ios/100/000000/company.png"}
             alt="Organization Logo"
             className="w-full h-full object-cover rounded-lg bg-gray-200"
           />
@@ -57,7 +57,7 @@ const OrganizationInfo = () => {
         </div>
 
         {/* Continue Button */}
-        <button className="w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700">
+        <button onClick={handleOrgInfo} className="cursor-pointer w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700">
           Continue
         </button>
       </div>
