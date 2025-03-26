@@ -1,77 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignIn = () => {
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const validateEmail = (email) => {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+    setError("");
+    // Proceed with login
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="text-center mb-6">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-            alt="HRM Logo"
-            className="w-16 h-16"
-          />
-          <h2 className="text-xl font-semibold">Welcome Back!</h2>
-          <p className="text-gray-600">Let's Get Some Work Done</p>
+    <div className="flex items-center justify-end min-h-screen bg-gray-400 p-5 pr-20">
+      <div className="bg-white p-12 rounded-lg shadow-lg w-[670px] h-[700px] flex flex-col items-center">
+        {/* Adjusted top margin */}
+        <div className="text-center mb-12 mt-12">
+          <h2 className="text-3xl font-bold">Welcome Back!</h2>
+          <p className="text-3xl font-bold">Let's Get Some Work Done</p>
         </div>
-        <form>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+          {/* Increased font size of labels and equal spacing */}
+          <div className="mb-8 w-3/4">
+            <label className="block text-[#4D5959] font-semibold text-lg mb-2">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your Email here"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
+          <div className="mb-8 w-3/4">
+            <label className="block text-[#4D5959] font-semibold text-lg mb-2">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your Password"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
-          <div className="flex justify-between items-center mb-4">
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          <div className="flex justify-center items-center mb-8 w-3/4">
             <button
               type="submit"
-              className="w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700"
+              className="cursor-pointer w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700 transform hover:scale-105 transition duration-300"
             >
-              Login  <span className="ml-2">➡️</span>
+              Login →
             </button>
           </div>
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 text-sm">
             Forgot Password?{" "}
-            <a href="/forgot-password" className="text-blue-500">
+            <a href="/forgot-password" className="text-blue-500 font-semibold">
               Click Here
             </a>
           </p>
         </form>
-
-        {/* OR Section with Horizontal Lines */}
-        <div className="flex items-center my-6">
-          <div className="flex-grow h-px bg-gray-300"></div>
-          <span className="px-3 text-gray-500">OR</span>
-          <div className="flex-grow h-px bg-gray-300"></div>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <button className="w-full flex items-center justify-center py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
-            <img
-              src="https://img.icons8.com/color/48/000000/google-logo.png"
-              alt="Google"
-              className="w-5 h-5 mr-2"
-            />
-            Sign In with Google
-          </button>
-          <button className="w-full flex items-center justify-center border-gray-400 py-3 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-100">
-            <img
-              src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019.png"
-              alt="Outlook"
-              className="w-5 h-5 mr-2"
-            />
-            Sign In With Outlook
-          </button>
-        </div>
       </div>
     </div>
   );
