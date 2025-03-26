@@ -28,7 +28,6 @@ const AppRoutes = () => {
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/recoverpassword" element={<RecoveredPassword />} />
-                    <Route path="/recoverpassword" element={<RecoveredPassword />} />
 
 
                     <Route path="/apply-leave" element={<ApplyLeave />} />

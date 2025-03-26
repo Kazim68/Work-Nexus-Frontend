@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router";
+import { Link } from 'react-router-dom';
 
 const SginUp = () => {
 
@@ -8,6 +9,8 @@ const SginUp = () => {
     const signUp = ()=>{
         navigate('/verify')
     }
+
+
     return (
         <>
             <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -39,7 +42,7 @@ const SginUp = () => {
                     </form>
 
                     <p className="text-center text-sm text-gray-600 mt-4">
-                        Already have an account? <a href="#" className="text-teal-600 font-medium">Log in</a>
+                        Already have an account? <Link to="../signin" className="text-teal-600 font-medium">Log in</Link>
                     </p>
 
                     <div className="flex items-center my-4">
