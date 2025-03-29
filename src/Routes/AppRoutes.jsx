@@ -27,7 +27,7 @@ const AppRoutes = () => {
                     <Route path="/payment" element={<PaymentSetup />} />
 
 
-                    <Route path="/" element={<SignUp />} />
+                    <Route path="/" element={<SignIn />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/recover-password" element={<RecoveredPassword />} />
 
