@@ -16,7 +16,7 @@ const Calendar = () => {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-5 w-80">
+    <div className="bg-white shadow-lg rounded-xl p-5 w-80 h-[280px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <button onClick={prevMonth} className="text-teal-600 text-xl hover:text-teal-800">
@@ -40,14 +40,14 @@ const Calendar = () => {
       {/* Calendar Grid */}
       <div className="grid grid-cols-7 gap-1">
         {Array(startDay).fill(null).map((_, i) => (
-          <div key={`empty-${i}`} className="h-10"></div>
+          <div key={`empty-${i}`} className="h-6"></div>
         ))}
         {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
           const isToday = dayjs().isSame(currentDate.date(day), "day");
           return (
             <div
               key={day}
-              className={`h-10 flex items-center justify-center rounded-lg cursor-pointer transition 
+              className={`h-6 flex items-center justify-center rounded-lg cursor-pointer transition 
               ${
                 isToday
                   ? "bg-teal-500 text-white font-bold shadow-md"

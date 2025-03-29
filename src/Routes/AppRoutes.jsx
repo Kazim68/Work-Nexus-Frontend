@@ -6,7 +6,7 @@ import OrganizationInfo from '../Components/Auth/SignUp/OrganizationInfo';
 import SignIn from '../Components/Auth/SignIn/SignIn';
 import ForgotPassword from '../Components/Auth/SignIn/ForgotPassword';
 import RecoveredPassword from '../Components/Auth/SignIn/RecoveredPassword';
-import LeaveReview from '../Components/LeaveModule/ReviewLeave/LeaveReview';
+import LeaveStatus from '../Components/LeaveModule/ReviewLeave/LeaveReview';
 import ApplyLeave from '../Components/LeaveModule/ApplyLeave/ApplyLeave';
 
 import PricingPlan from '../Components/Auth/SignUp/PricingPlan';
@@ -25,14 +25,13 @@ const AppRoutes = () => {
                     <Route path="/payment" element={<PaymentSetup />} />
 
 
-                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/" element={<SignIn />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/recoverpassword" element={<RecoveredPassword />} />
-                    <Route path="/recoverpassword" element={<RecoveredPassword />} />
+                    <Route path="/recover-password" element={<RecoveredPassword />} />
 
 
                     <Route path="/apply-leave" element={<ApplyLeave />} />
-                    <Route path="/leave-review" element={<LeaveReview />} />
+                    <Route path="/leave-status" element={<LeaveStatus />} />
                     
                     
                     

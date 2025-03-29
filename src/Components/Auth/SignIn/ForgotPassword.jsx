@@ -1,48 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LockIcon from "../../../assets/images/lock.png";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Reset link sent to:", email);
   };
 
-  let navigate = useNavigate();
-
   return (
-
-
-    <div className="flex justify-center items-center h-screen bg-gray-200">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96 min-h-[500px] flex flex-col justify-center">
-        <div className="flex justify-center mb-4">
-        <img 
-            src="https://cdn-icons-png.flaticon.com/512/61/61457.png" 
-            alt="Lock Icon" 
-            className="w-12 h-12"
-          />
+    <div className="flex items-center justify-end h-screen bg-gray-300 p-4 pr-16">
+      <div className="bg-white p-10 rounded-lg shadow-lg w-[670px] h-[730px] flex flex-col items-center">
+        {/* Lock Icon with spacing */}
+        <div className="flex w-full justify-end mb-8">
+          <img src={LockIcon} alt="Lock Icon" className="w-24 h-24" />
         </div>
-        <h2 className="text-xl font-semibold text-center mb-2">
-          Oh No! You Forgot Password.
+
+        {/* Increased text size & added margin */}
+        <h2 className="text-2xl font-bold text-center mb-3 mt-4">
+          Oh No! You Forgot Your Password.
         </h2>
-        <p className="text-gray-600 text-center mb-6">
+        <p className="text-lg font-semibold text-center mb-6">
           Don’t Worry, We Got Backups.
         </p>
 
-        <form onSubmit={handleSubmit}>
-          <label className="block text-gray-700 mb-1">Email</label>
+        {/* Centered Input Field */}
+        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Email
+          </label>
           <input
             type="email"
             placeholder="Enter your Email here"
-            className="w-full p-2 border rounded mb-4"
+            className="w-3/4 p-4 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-6 text-lg"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          
+          {/* Centered Button */}
           <button
             type="submit"
-            className="w-full bg-teal-600 text-white p-2 rounded hover:bg-teal-700 flex justify-center items-center gap-2"
+            className="w-3/4 bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700 transition duration-300"
             onClick={() => navigate("/verify")}
           >
             Send Email →
