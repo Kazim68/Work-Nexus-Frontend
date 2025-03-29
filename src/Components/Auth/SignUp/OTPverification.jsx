@@ -1,11 +1,23 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function OTPVerification() {
-
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", ""]);
+  const [timer, setTimer] = useState(60);
+  const [canResend, setCanResend] = useState(false);
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setCanResend(true);
+    }
+  }, [timer]);
 
   const handleChange = (index, e) => {
     const value = e.target.value.replace(/\D/, "");
@@ -25,9 +37,18 @@ export default function OTPVerification() {
     }
   };
 
-  const verifyOtp= ()=>{
-    navigate('/orgInfo')
-  }
+  const verifyOtp = () => {
+    navigate("/orgInfo");
+  };
+
+  const handleResend = () => {
+    if (canResend) {
+      setOtp(["", "", "", ""]);
+      setTimer(60);
+      setCanResend(false);
+      // Implement actual resend logic here (e.g., API call to send OTP again)
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
@@ -59,10 +80,18 @@ export default function OTPVerification() {
         </div>
         
         <p className="text-gray-500 text-sm">
-          Didn’t Receive? <span className="text-teal-600 font-medium cursor-pointer">Resend</span> <span className="font-semibold">60</span>
+          Didn’t Receive? {" "}
+          {canResend ? (
+            <span onClick={handleResend} className="text-teal-600 font-medium cursor-pointer">Resend</span>
+          ) : (
+            <span className="font-semibold">{timer}</span>
+          )}
         </p>
         
-        <button onClick={verifyOtp} className="cursor-pointer w-full bg-teal-600 text-white py-4 rounded-lg text-lg font-medium mt-6 hover:bg-teal-700">
+        <button
+          onClick={verifyOtp}
+          className="cursor-pointer w-full bg-teal-600 text-white py-4 rounded-lg text-lg font-medium mt-6 hover:bg-teal-700"
+        >
           Continue
         </button>
       </div>

@@ -79,7 +79,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   )}
                 </div>
                 {item.dropdown && openDropdown === index && (
-                  <ul className="ml-4 mt-1">
+                  <ul className="ml-7 mt-1">
                     {item.dropdown.map((subItem, subIndex) => (
                       <li 
                         key={subIndex} 
