@@ -1,15 +1,19 @@
 import React from "react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaRegCreditCard } from "react-icons/fa"; // Import Credit Card Icon
+import ArrowButton from "../../Shared/ArrowButton";
 
 const PaymentSetup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-lg w-full p-6 bg-white shadow-lg rounded-lg">
-        {/* Heading */}
-        <h2 className="text-2xl font-bold text-gray-900 text-center">
-          Just one Step To Go! <br />
-          <span className="text-gray-700">Setup Payment Method</span>
-        </h2>
+        {/* Heading with Icon */}
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Just one Step To Go! <br />
+            <span className="text-gray-700">Setup Payment Method</span>
+          </h2>
+          <FaRegCreditCard className="text-3xl text-gray-600" /> {/* Card Icon */}
+        </div>
 
         {/* Payment Form */}
         <div className="mt-6 space-y-4">
@@ -61,7 +65,7 @@ const PaymentSetup = () => {
 
           {/* Proceed Button */}
           <button className="cursor-pointer w-full flex justify-center items-center gap-2 bg-teal-700 text-white font-bold py-3 rounded-lg hover:bg-teal-800 transition">
-            Proceed <FaArrowRight />
+            Proceed
           </button>
         </div>
 
@@ -81,6 +85,9 @@ const PaymentSetup = () => {
           </div>
         </div>
       </div>
+
+
+
     </div>
   );
 };
