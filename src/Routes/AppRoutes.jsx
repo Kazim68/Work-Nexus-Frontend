@@ -11,6 +11,8 @@ import ApplyLeave from '../Components/LeaveModule/ApplyLeave/ApplyLeave';
 
 import PricingPlan from '../Components/Auth/SignUp/PricingPlan';
 import PaymentSetup from '../Components/Auth/SignUp/PaymentSetup';
+import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashboard';
+import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';
 
 
 const AppRoutes = () => {
@@ -32,6 +34,11 @@ const AppRoutes = () => {
 
                     <Route path="/apply-leave" element={<ApplyLeave />} />
                     <Route path="/leave-status" element={<LeaveStatus />} />
+
+                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
+                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+
+
                     
                     
                     

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../Layout/Layout";
-import Calendar from "../ApplyLeave/Calendar";
+import Calendar from "../../Shared/Calendar";
 import LeaveReport from "../ApplyLeave/LeaveReport";
 import LeaveSummary from "../ApplyLeave/LeaveSummary";
 
