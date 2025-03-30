@@ -19,7 +19,7 @@ const Dashboard = () => {
         </div>
 
         <div className="w-full">
-          <div><Calendar /></div>
+          <div><Calendar  width = "w-80" height = "h-[280px]" ch= "h-6"/></div>
           <div className="mt-4"><LeaveSummary /></div>
         </div>
       </div>
