@@ -1,5 +1,6 @@
 import { FaCalendarTimes, FaCalendarCheck, FaBalanceScale, FaHeartbeat } from "react-icons/fa";
 
+
 const LeaveStats = () => {
   const stats = [
     { icon: <FaCalendarTimes className="text-red-400 text-3xl" />, value: "10", label: "Leave Taken" },
@@ -9,9 +10,9 @@ const LeaveStats = () => {
   ];
 
   return (
-    <div className="flex gap-4 p-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 w-full">
       {stats.map((stat, index) => (
-        <div key={index} className="flex flex-col p-4 rounded-lg shadow-md w-40 text-left">
+        <div key={index} className="flex flex-col p-4 rounded-lg shadow-md text-left">
           <div className="flex items-center w-full mb-2">
             <p className="text-xl font-bold flex-1">{stat.value}</p>
             <div className="flex justify-center items-center w-12 h-12 bg-gray-200 rounded-full">
@@ -25,4 +26,4 @@ const LeaveStats = () => {
   );
 };
 
-export default LeaveStats;
+export default LeaveStats
