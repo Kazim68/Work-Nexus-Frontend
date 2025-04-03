@@ -13,6 +13,9 @@ import PricingPlan from '../Components/Auth/SignUp/PricingPlan';
 import PaymentSetup from '../Components/Auth/SignUp/PaymentSetup';
 import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashboard';
 import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';
+import CompanyPolices from '../Components/CompanyPolices/Companypolicy';
+import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
+
 
 
 const AppRoutes = () => {
@@ -27,7 +30,7 @@ const AppRoutes = () => {
                     <Route path="/payment" element={<PaymentSetup />} />
 
 
-                    <Route path="/" element={<SignIn />} />
+                    <Route path="/signin" element={<SignIn />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/recover-password" element={<RecoveredPassword />} />
 
@@ -35,13 +38,13 @@ const AppRoutes = () => {
                     <Route path="/apply-leave" element={<ApplyLeave />} />
                     <Route path="/leave-status" element={<LeaveStatus />} />
 
-                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
-                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+                    <Route path="/" element={<LeaveDashboard />} />
+                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
+                    <Route path="/company-policies" element={<CompanyPolices />} />
+                    <Route path="/profile-setting" element={<ProfileDashboard />} />
 
 
-                    
-                    
-                    
+
                 </Routes>
             </BrowserRouter>
         </>
