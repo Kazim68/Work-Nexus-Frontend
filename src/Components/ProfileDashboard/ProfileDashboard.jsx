@@ -4,64 +4,49 @@ import EmployeeDetails from "./EmployeeDetails";
 import AddressInfo from "./AddressInfo";
 import BankInfo from "./BankInfo";
 import Layout from "../Layout/Layout";
+import ContactInfoModal from "./ContactInfoModal";
 
 const ProfileDashboard = () => {
-  const [showProfileOnly, setShowProfileOnly] = useState(true);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-100 p-8">
-
-        {/* Profile Section */}
-        <div className="flex justify-start mb-6 ml-15">
+      <div className={`min-h-screen bg-gray-100 p-8 ${showContactModal ? "blur-sm" : ""}`}>
+        {/* Profile Section (Profile Picture & Buttons) */}
+        <div className=" mb-6">
           <Profile />
-        </div>
-        {/* Navigation Buttons */}
-        <div className="flex justify-start mb-4">
-          <button
-            className={`px-4 py-2 mr-2 ${
-              showProfileOnly ? "text-gray-700 border-b-2 border-gray-700" : "text-gray-500"
-            }`}
-            onClick={() => setShowProfileOnly(true)}
-          >
-            Profile
-          </button>
-          <button
-            className={`px-4 py-2 ${
-              !showProfileOnly ? "text-gray-700 border-b-2 border-gray-700" : "text-gray-500"
-            }`}
-            onClick={() => setShowProfileOnly(false)}
-          >
-            Contact Info
-          </button>
+          {/* Navigation Buttons under Profile */}
+          <div className="mt-4 flex space-x-4">
+            <button className="px-4 py-2 text-gray-700 border-b-2 border-gray-700">
+              Profile
+            </button>
+            <button
+              className="px-4 py-2 text-gray-500"
+              onClick={() => setShowContactModal(true)}
+            >
+              Contact Info
+            </button>
+          </div>
+          {/* Dotted Line Separator */}
+          <hr className="border-dotted border-gray-400 mt-4" />
         </div>
 
-        {/* Dotted space Line */}
-        <hr className="border-dotted border-gray-400 my-4 mx-4" />
-
-        {/* Conditional Rendering */}
-        {!showProfileOnly && (
-          <>
-            {/* Employee Details */}
-            <EmployeeDetails />
-
-            {/* Address and Bank Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              {/* Address Info Section */}
-              <div>
-                <h2 className="text-lg mb-4 text-gray-700">My Address</h2>
-                <AddressInfo />
-              </div>
-
-              {/* Bank Info Section */}
-              <div>
-                <h2 className="text-lg mb-4 text-gray-700">Bank Information</h2>
-                <BankInfo />
-              </div>
-            </div>
-          </>
-        )}
+        {/* Profile Details */}
+        <EmployeeDetails />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div>
+            <h2 className="text-lg mb-4 text-gray-700">My Address</h2>
+            <AddressInfo />
+          </div>
+          <div>
+            <h2 className="text-lg mb-4 text-gray-700">Bank Information</h2>
+            <BankInfo />
+          </div>
+        </div>
       </div>
+
+      {/* Contact Info Modal */}
+      <ContactInfoModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </Layout>
   );
 };
