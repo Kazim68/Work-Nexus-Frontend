@@ -8,7 +8,7 @@ const profileData = {
 
 const Profile = () => {
   return (
-    <div className="flex items-center p-4 bg-gray rounded-md">
+    <div className="flex items-start p-4 bg-gray rounded-md">
       <img src={profileData.imageUrl} alt="Profile" className="w-35 h-35 rounded-full" />
       <div className="ml-4">
         <h2 className="text-xl font-semibold">{profileData.name}</h2>
