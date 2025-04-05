@@ -6,9 +6,11 @@ import Calendar from '../../Shared/Calendar'
 import AttendanceChart from './AttendanceChart'
 import ProjectPieChart from './ProjectPieChart'
 import ActionCards from './ActionCards'
+import { useSelector } from 'react-redux'
 
 
 const Main = () => {
+
     return (
         <Layout>
             <div className="flex flex-col gap-4 w-full dashboard-layout">
