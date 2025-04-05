@@ -15,6 +15,8 @@ import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashbo
 import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';
 import CompanyPolices from '../Components/CompanyPolices/Companypolicy';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
+import NewMail from '../Components/Auth/SignUp/NewMail';
+import Loader from '../Components/Shared/ButtonLoader';
 
 
 
@@ -25,6 +27,8 @@ const AppRoutes = () => {
                 <Routes>
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/verify" element={<OTPVerification />} />
+                    <Route path="/update-email" element={<NewMail />} />
+
                     <Route path="/orgInfo" element={<OrganizationInfo />} />
                     <Route path="/pricing-plan" element={<PricingPlan />} />
                     <Route path="/payment" element={<PaymentSetup />} />
@@ -38,7 +42,7 @@ const AppRoutes = () => {
                     <Route path="/apply-leave" element={<ApplyLeave />} />
                     <Route path="/leave-status" element={<LeaveStatus />} />
 
-                    <Route path="/" element={<LeaveDashboard />} />
+                    <Route path="/" element={<Loader />} />
                     <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
                     <Route path="/company-policies" element={<CompanyPolices />} />
                     <Route path="/profile-setting" element={<ProfileDashboard />} />

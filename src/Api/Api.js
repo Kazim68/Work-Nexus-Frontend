@@ -63,7 +63,17 @@ export const update = async (url, id, data) => {
     const response = await apiClient.put(`${url}/${id}`, data);
     return response.data; // Return updated item data
   } catch (error) {
-    throw new Error(`Failed to update item with ID ${id} at ${url}: ${error.message}`);
+    if (error.response) {
+      const errorMessage = error.response.data.message || "An error occurred";
+      throw new Error(errorMessage);
+    }
+    else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    }
+
+    else {
+      throw new Error(error.message || "Something went wrong.");
+    }
   }
 };
 

@@ -3,13 +3,13 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { create } from "../../../Api/Api"; // Import the generalized API function
 import { toast } from "react-toastify"; // For notifications
+import ButtonLoader from "../../Shared/ButtonLoader";
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -23,36 +23,33 @@ const SignUp = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        if (name === "fullName") {
-            // Split fullName into firstName and lastName
-            const [firstName, ...rest] = value.split(" ");
-            const lastName = rest.join(" "); // Join the rest as the last name
-            setFormData((prevData) => ({
-                ...prevData,
-                firstName: firstName || "", // First name is the first word
-                lastName: lastName || "",    // Last name is the rest
-            }));
-        } else {
-            setFormData((prevData) => ({
-                ...prevData,
-                [name]: value,
-            }));
-        }
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
 
     const validate = () => {
         let errors = {};
 
-        if (!formData.firstName) errors.firstName = "First Name is required";
-        if (!formData.lastName) errors.lastName = "Last Name is required";
+        // Validate Full Name (split into firstName and lastName)
+        if (!formData.fullName) {
+            errors.fullName = "Full Name is required";
+        } else if (!formData.fullName.includes(" ")) {
+            errors.fullName = "Full Name must include both first and last name";
+        }
+
+        // Validate Email
         if (!formData.email) errors.email = "Email is required";
         else if (!/\S+@\S+\.\S+/.test(formData.email))
             errors.email = "Email is invalid";
 
+        // Validate Password
         if (!formData.password) errors.password = "Password is required";
         else if (formData.password.length < 6)
             errors.password = "Password must be at least 6 characters long";
 
+        // Validate Confirm Password
         if (formData.password !== formData.confirmPassword)
             errors.confirmPassword = "Passwords do not match";
 
@@ -66,19 +63,18 @@ const SignUp = () => {
         if (!validate()) return;
 
         setIsSubmitting(true);
-        
+
         try {
             await create("/signup", formData);
-            await create("/sendotp", {email:formData.email});
+            await create("/sendotp", { email: formData.email });
             localStorage.setItem("email", formData.email);
+
             navigate("/verify");
         } catch (error) {
             toast.error(error.message || "Something went wrong.");
             setIsSubmitting(false);
         }
     };
-
-    
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -132,9 +128,9 @@ const SignUp = () => {
                             />
                             <span onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 cursor-pointer">
                                 {showPassword ? (
-                                    <img src="https://img.icons8.com/ios-filled/50/000000/visible.png" alt="eye" className="w-6 h-6" />
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" alt="eye" className="w-6 h-6" />
                                 ) : (
-                                    <img src="https://img.icons8.com/ios-filled/50/000000/invisible.png" alt="eye-slash" className="w-6 h-6" />
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/invisible.png" alt="eye-slash" className="w-6 h-6" />
                                 )}
                             </span>
                         </div>
@@ -154,9 +150,9 @@ const SignUp = () => {
                             />
                             <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-3 cursor-pointer">
                                 {showConfirmPassword ? (
-                                    <img src="https://img.icons8.com/ios-filled/50/000000/visible.png" alt="eye" className="w-6 h-6" />
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png" alt="eye" className="w-6 h-6" />
                                 ) : (
-                                    <img src="https://img.icons8.com/ios-filled/50/000000/invisible.png" alt="eye-slash" className="w-6 h-6" />
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/invisible.png" alt="eye-slash" className="w-6 h-6" />
                                 )}
                             </span>
                         </div>
@@ -169,9 +165,7 @@ const SignUp = () => {
                         className="cursor-pointer w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700"
                     >
                         {isSubmitting ? (
-                            <div className="flex justify-center items-center space-x-2">
-                                <div className="w-8 h-8 border-4 border-t-4 border-teal-600 border-solid rounded-full animate-spin"></div>
-                            </div>
+                            <ButtonLoader />
                         ) : (
                             "Create Account →"
                         )}
