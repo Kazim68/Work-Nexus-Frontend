@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Make sure to import and use react-toastify
+import { create } from "../../../Api/Api"; // Adjust the import path if needed
 
 export default function OTPVerification() {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", ""]);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(180);
   const [canResend, setCanResend] = useState(false);
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
+
+  const email = localStorage.getItem("email");
 
   useEffect(() => {
     if (timer > 0) {
@@ -20,33 +24,76 @@ export default function OTPVerification() {
   }, [timer]);
 
   const handleChange = (index, e) => {
-    const value = e.target.value.replace(/\D/, "");
-    if (!value) return;
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
+    const value = e.target.value.replace(/\D/, ""); // Only allow digits
+    const newOtp = [...otp]; // Make a copy of the OTP array
 
-    if (index < 3 && value) {
-      inputRefs[index + 1].current.focus();
+    if (value) {
+      // Update OTP array and move focus to next input if value is entered
+      newOtp[index] = value;
+      setOtp(newOtp);
+
+      // Move focus to next input if the current one has a value
+      if (index < 3 && value) {
+        inputRefs[index + 1].current.focus();
+      }
+    } else {
+      // If backspace is pressed (or a character is deleted), remove the value from OTP
+      newOtp[index] = "";
+      setOtp(newOtp);
+
+      // Move focus to previous input if backspace is pressed
+      if (index > 0) {
+        inputRefs[index - 1].current.focus();
+      }
     }
   };
 
   const handleKeyDown = (index, e) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputRefs[index - 1].current.focus();
+      inputRefs[index - 1].current.focus(); // Move focus if the current input is empty
     }
   };
 
-  const verifyOtp = () => {
-    navigate("/orgInfo");
+  const verifyOtp = async () => {
+    const otpString = otp.join("");
+
+    if (otpString.length !== 4) {
+      toast.error("Please enter a valid 4-digit OTP.");
+      return;
+    }
+
+    try {
+      const response = await create("/verifyotp", { email: email, otp: otpString });
+      console.log(response)
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        navigate("/orgInfo");
+      } else {
+        toast.error(response.data);
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      toast.error(error.message || "Something went wrong. Please try again.");
+    }
   };
 
-  const handleResend = () => {
-    if (canResend) {
-      setOtp(["", "", "", ""]);
-      setTimer(60);
-      setCanResend(false);
-      // Implement actual resend logic here (e.g., API call to send OTP again)
+  const handleResend = async () => {
+    if (!canResend) return;
+
+    try {
+      const response = await create("/sendotp", { email });
+
+      if (response.status === 200) {
+        toast.success("OTP resent successfully.");
+        setOtp(["", "", "", ""]);
+        setTimer(60);
+        setCanResend(false);
+      } else {
+        toast.error("Failed to resend OTP.");
+      }
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+      toast.error(error.message || "Failed to resend OTP.");
     }
   };
 
@@ -61,9 +108,10 @@ export default function OTPVerification() {
         <h2 className="text-2xl font-semibold">Verify Your Account</h2>
         <p className="text-gray-600">Check Your Email For OTP</p>
         <p className="text-gray-500 text-sm mt-4">
-          Your email is example@example.com. <span className="text-teal-600 font-medium cursor-pointer">Not Your Email?</span>
+          Your email is {email}.{" "}
+          <span className="text-teal-600 font-medium cursor-pointer">Not Your Email?</span>
         </p>
-        
+
         <div className="flex justify-center gap-4 my-8">
           {otp.map((digit, index) => (
             <input
@@ -78,16 +126,16 @@ export default function OTPVerification() {
             />
           ))}
         </div>
-        
+
         <p className="text-gray-500 text-sm">
-          Didn’t Receive? {" "}
+          Didn’t Receive?{" "}
           {canResend ? (
             <span onClick={handleResend} className="text-teal-600 font-medium cursor-pointer">Resend</span>
           ) : (
             <span className="font-semibold">{timer}</span>
           )}
         </p>
-        
+
         <button
           onClick={verifyOtp}
           className="cursor-pointer w-full bg-teal-600 text-white py-4 rounded-lg text-lg font-medium mt-6 hover:bg-teal-700"
