@@ -32,7 +32,17 @@ export const fetchWithQueryParams = async (url, params) => {
     const response = await apiClient.get(url, { params });
     return response.data; // Return data filtered by query params
   } catch (error) {
-    throw new Error(`Failed to fetch data with query parameters from ${url}: ${error.message}`);
+    if (error.response) {
+      const errorMessage = error.response.data.message || "An error occurred";
+      throw new Error(errorMessage);
+    }
+    else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    }
+
+    else {
+      throw new Error(error.message || "Something went wrong.");
+    }
   }
 };
 

@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { create } from "../../../Api/Api"; // Adjust if needed
-import NewMail from "./NewMail"; // 🔄 Replace with actual path to NewMail
+import UpdateEmail from "./UpdateEmail"; // 🔄 Replace with actual path to UpdateEmail
 import ButtonLoader from "../../Shared/ButtonLoader";
 
 export default function OTPVerification() {
@@ -15,15 +15,19 @@ export default function OTPVerification() {
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
 
   const email = localStorage.getItem("email");
-
+  const location = useLocation();
+  const prevLocation = location.state?.location
+  
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      localStorage.setItem("timer", timer);
       return () => clearInterval(interval);
     } else {
       setCanResend(true);
     }
   }, [timer]);
+  
 
   const handleChange = (index, e) => {
     const value = e.target.value.replace(/\D/, "");
@@ -59,8 +63,15 @@ export default function OTPVerification() {
       if (response.status === 200) {
         toast.success(response.data.message);
         setLoading(false)
+        localStorage.removeItem("email");
+        if(prevLocation == 'fp'){
+          navigate("/recover-password");
 
-        navigate("/orgInfo");
+        }else{
+          navigate("/orgInfo");
+        }
+
+        
       } else {
         setLoading(false)
         toast.error(response.data);
@@ -172,7 +183,7 @@ export default function OTPVerification() {
             >
               &times;
             </button>
-            <NewMail onClose={() => setShowModal(false)} />
+            <UpdateEmail onClose={() => setShowModal(false)} />
           </div>
         </div>
       )}

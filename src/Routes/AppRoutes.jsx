@@ -15,8 +15,8 @@ import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashbo
 import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';
 import CompanyPolices from '../Components/CompanyPolices/Companypolicy';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
-import NewMail from '../Components/Auth/SignUp/NewMail';
-import Loader from '../Components/Shared/ButtonLoader';
+import NewMail from '../Components/Auth/SignUp/UpdateEmail';
+import Loader from '../Components/Shared/Loader';
 
 
 
