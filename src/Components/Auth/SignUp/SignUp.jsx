@@ -53,7 +53,9 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword)
             errors.confirmPassword = "Passwords do not match";
 
+
         setErrors(errors);
+        
         return Object.keys(errors).length === 0;
     };
 
@@ -61,11 +63,12 @@ const SignUp = () => {
         e.preventDefault();
 
         if (!validate()) return;
+        
 
         setIsSubmitting(true);
 
         try {
-            await create("/signup", formData);
+            await create("/signUp", formData);
             await create("/sendotp", { email: formData.email });
             localStorage.setItem("email", formData.email);
 
