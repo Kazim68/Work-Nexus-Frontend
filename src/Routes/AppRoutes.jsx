@@ -19,38 +19,44 @@ import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
 
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleClientID } from './Secret';
 
 const AppRoutes = () => {
     return (
         <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/verify" element={<OTPVerification />} />
-                    <Route path="/update-email" element={<NewMail />} />
+            <GoogleOAuthProvider clientId={GoogleClientID()}>
+                <BrowserRouter>
+                    <Routes>
 
-                    <Route path="/orgInfo" element={<OrganizationInfo />} />
-                    <Route path="/pricing-plan" element={<PricingPlan />} />
-                    <Route path="/payment" element={<PaymentSetup />} />
+                        <Route path="/signup" element={<SignUp />} />
 
+                        <Route path="/verify" element={<OTPVerification />} />
+                        <Route path="/update-email" element={<NewMail />} />
 
-                    <Route path="/signin" element={<SignIn />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/recover-password" element={<RecoveredPassword />} />
+                        <Route path="/orgInfo" element={<OrganizationInfo />} />
+                        <Route path="/pricing-plan" element={<PricingPlan />} />
+                        <Route path="/payment" element={<PaymentSetup />} />
 
 
-                    <Route path="/apply-leave" element={<ApplyLeave />} />
-                    <Route path="/leave-status" element={<LeaveStatus />} />
-
-                    <Route path="/" element={<Loader />} />
-                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
-                    <Route path="/company-policies" element={<CompanyPolices />} />
-                    <Route path="/profile-setting" element={<ProfileDashboard />} />
+                        <Route path="/signin" element={<SignIn />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/recover-password" element={<RecoveredPassword />} />
 
 
+                        <Route path="/apply-leave" element={<ApplyLeave />} />
+                        <Route path="/leave-status" element={<LeaveStatus />} />
 
-                </Routes>
-            </BrowserRouter>
+                        <Route path="/" element={<Loader />} />
+                        <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+                        <Route path="/company-policies" element={<CompanyPolices />} />
+                        <Route path="/profile-setting" element={<ProfileDashboard />} />
+
+
+
+                    </Routes>
+                </BrowserRouter>
+            </GoogleOAuthProvider>
         </>
     );
 };

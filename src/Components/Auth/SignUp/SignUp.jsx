@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { create } from "../../../Api/Api"; // Import the generalized API function
 import { toast } from "react-toastify"; // For notifications
 import ButtonLoader from "../../Shared/ButtonLoader";
+import GoogleLogin from './GoogleLogin';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -55,7 +56,7 @@ const SignUp = () => {
 
 
         setErrors(errors);
-        
+
         return Object.keys(errors).length === 0;
     };
 
@@ -63,7 +64,7 @@ const SignUp = () => {
         e.preventDefault();
 
         if (!validate()) return;
-        
+
 
         setIsSubmitting(true);
 
@@ -179,6 +180,13 @@ const SignUp = () => {
                     Already have an account?{" "}
                     <Link to="../signin" className="text-teal-600 font-medium">Log in</Link>
                 </p>
+
+                <div className="flex items-center justify-center my-2">
+                    <span className="text-gray-800 text-xl">OR</span>
+                </div>
+                <div className="flex items-center justify-center my-2">
+                    <GoogleLogin></GoogleLogin>
+                </div>
             </div>
         </div>
     );

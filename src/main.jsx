@@ -7,6 +7,7 @@ import { persistor, store } from './Redux/Store.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
+
 const queryClient = new QueryClient();
 
 
