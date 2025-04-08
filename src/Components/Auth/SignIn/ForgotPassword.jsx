@@ -1,25 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LockIcon from "../../../assets/images/lock.png";
+import { toast } from "react-toastify";
+import { create } from "../../../Api/Api";
+import ButtonLoader from "../../Shared/ButtonLoader";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Reset link sent to:", email);
+
+    if (!email) {
+      toast.error("Email is required.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await create("reset-password/send-recovery-link", { email:email });
+
+      if (response.status === 200) {
+        toast.success("Email sent successfully!");
+        localStorage.setItem("email" , email)
+
+      } else {
+        toast.error("Failed to send OTP.");
+      }
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      toast.error(error.message || "An error occurred.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="flex items-center justify-end h-screen bg-gray-300 p-4 pr-16">
       <div className="bg-white p-10 rounded-lg shadow-lg w-[670px] h-[730px] flex flex-col items-center">
-        {/* Lock Icon with spacing */}
         <div className="flex w-full justify-end mb-8">
           <img src={LockIcon} alt="Lock Icon" className="w-24 h-24" />
         </div>
 
-        {/* Increased text size & added margin */}
         <h2 className="text-2xl font-bold text-center mb-3 mt-4">
           Oh No! You Forgot Your Password.
         </h2>
@@ -27,7 +51,6 @@ const ForgotPassword = () => {
           Don’t Worry, We Got Backups.
         </p>
 
-        {/* Centered Input Field */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
           <label className="block text-gray-700 text-lg font-medium mb-2">
             Email
@@ -40,14 +63,13 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          
-          {/* Centered Button */}
+
           <button
             type="submit"
-            className="w-3/4 bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700 transition duration-300"
-            onClick={() => navigate("/verify")}
+            disabled={isSubmitting}
+            className="w-3/4 bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700 transition duration-300 flex justify-center items-center gap-2"
           >
-            Send Email →
+            {isSubmitting ? <ButtonLoader /> : "Send Email →"}
           </button>
         </form>
       </div>
