@@ -13,7 +13,7 @@ import PricingPlan from '../Components/Payment/PricingPlan';
 import PaymentSetup from '../Components/Auth/SignUp/PaymentSetup';
 import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashboard';
 import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';
-import CompanyPolices from '../Components/CompanyPolices/Companypolicy.jsx';
+import CompanyPolices from '../Components/CompanyPolices/CompanyPolicy.jsx';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
