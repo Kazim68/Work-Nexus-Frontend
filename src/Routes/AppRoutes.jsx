@@ -28,7 +28,7 @@ const AppRoutes = () => {
             <GoogleOAuthProvider clientId={GoogleClientID()}>
                 <BrowserRouter>
                     <Routes>
-
+                        //SIGNUP ROUTE
                         <Route path="/signup" element={<SignUp />} />
 
                         <Route path="/verify" element={<OTPVerification />} />
