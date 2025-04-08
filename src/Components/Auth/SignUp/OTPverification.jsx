@@ -15,8 +15,7 @@ export default function OTPVerification() {
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
 
   const email = localStorage.getItem("email");
-  const location = useLocation();
-  const prevLocation = location.state?.location
+
   
   useEffect(() => {
     if (timer > 0) {
@@ -59,19 +58,13 @@ export default function OTPVerification() {
 
     try {
       setLoading(true)
-      const response = await create("/verifyotp", { email, otp: otpString });
+      const response = await create("/otp/verifyotp", { email, otp: otpString });
       if (response.status === 200) {
         toast.success(response.data.message);
         setLoading(false)
         localStorage.removeItem("email");
-        if(prevLocation == 'fp'){
-          navigate("/recover-password");
-
-        }else{
-          navigate("/orgInfo");
-        }
-
         
+        navigate("/pricing-plan");
       } else {
         setLoading(false)
         toast.error(response.data);
@@ -88,7 +81,7 @@ export default function OTPVerification() {
     if (!canResend) return;
     try {
       setLoading(true)
-      const response = await create("/sendotp", { email });
+      const response = await create("/otp/sendotp", { email });
       if (response.status === 200) {
         toast.success("OTP resent successfully.");
         setOtp(["", "", "", ""]);

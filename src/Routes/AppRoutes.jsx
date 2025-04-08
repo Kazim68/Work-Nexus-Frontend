@@ -9,7 +9,7 @@ import RecoveredPassword from '../Components/Auth/SignIn/RecoveredPassword';
 import LeaveStatus from '../Components/LeaveModule/ReviewLeave/LeaveReview';
 import ApplyLeave from '../Components/LeaveModule/ApplyLeave/ApplyLeave';
 
-import PricingPlan from '../Components/Auth/SignUp/PricingPlan';
+import PricingPlan from '../Components/Payment/PricingPlan';
 import PaymentSetup from '../Components/Auth/SignUp/PaymentSetup';
 import LeaveDashboard from '../Components/LeaveModule/LeaveDashboard/LeaveDashboard';
 import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/AttendanceDashboard';

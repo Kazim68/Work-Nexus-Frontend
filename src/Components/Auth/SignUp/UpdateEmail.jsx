@@ -26,7 +26,6 @@ const SendOtp = () => {
     }
     return tempErrors;
   };
-
   const sendOtp = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -37,18 +36,29 @@ const SendOtp = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await create('/sendotp', { email: formData.email });
+      const res = await update('/auth/update-email', storedEmail, formData);
+      if (res.success) {
+        localStorage.setItem("email", formData.newEmail);
+        toast.success("Email updated successfully! Sending OTP....");
+        try {
+          const response = await create("/otp/sendotp", { email: formData.newEmail });
 
-      if (res.status === 200) {
-        toast.success('OTP sent successfully.');
-        localStorage.setItem('email', formData.email);
-        navigate('/verify');
+          if (response.status === 200) {
+            toast.success("OTP resent successfully.");
+            navigate('/verify')
+          } else {
+            toast.error("Failed to resend OTP.");
+          }
+        } catch (error) {
+          console.error("Error resending OTP:", error);
+          toast.error(error.message || "Failed to resend OTP.");
+        }
       } else {
-        toast.error(res.message || 'Failed to send OTP.');
+        toast.error(res.message || "Failed to update email.");
       }
     } catch (error) {
-      console.error('Error sending OTP:', error);
-      toast.error(error.message || 'Something went wrong.');
+      console.error(error);
+      toast.error("Something went wrong while updating the email.");
     } finally {
       setIsSubmitting(false);
     }
@@ -65,9 +75,8 @@ const SendOtp = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter your Email here"
-            className={`w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
-              errors.email ? 'focus:ring-red-500' : 'focus:ring-teal-500'
-            }`}
+            className={`w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${errors.email ? 'focus:ring-red-500' : 'focus:ring-teal-500'
+              }`}
           />
           {errors.email && (
             <p className="text-red-500 text-xs">{errors.email}</p>

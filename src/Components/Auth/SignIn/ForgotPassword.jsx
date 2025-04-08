@@ -20,7 +20,7 @@ const ForgotPassword = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await create("/send-recovery-link", { email:email });
+      const response = await create("reset-password/send-recovery-link", { email:email });
 
       if (response.status === 200) {
         toast.success("Email sent successfully!");
