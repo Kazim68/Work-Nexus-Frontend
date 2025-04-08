@@ -43,7 +43,7 @@ const SignIn = () => {
         
         dispatch(signInSuccess(response.data));
         toast.success("Login successful!");
-        navigate("/dashboard"); // Redirect to your desired route
+        navigate("/orgInfo"); // Redirect to your desired route
       } else {
         toast.error(response.data.message || "Login failed.");
       }
