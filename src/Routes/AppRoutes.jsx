@@ -18,6 +18,10 @@ import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
 
+import Home from '../Components/LandingPages/Home/Home.jsx';
+import Modules from '../Components/LandingPages/Modules/Modules.jsx';
+import Aim from '../Components/LandingPages/Aim/Aim';
+import Services from '../Components/LandingPages/Services/Services';
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
@@ -39,6 +43,18 @@ const AppRoutes = () => {
                         <Route path="/payment" element={<PaymentSetup />} />
 
 
+
+                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
+                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
+                    <Route path="/company-policies" element={<CompanyPolices />} />
+                    <Route path="/profile-setting" element={<ProfileDashboard />} />
+
+                    <Route path="/" element={< Home/>} />
+                    <Route path="/modules" element={< Modules/>} />
+                    <Route path="/aim" element={< Aim/>} />
+                    <Route path="/services" element={< Services/>} />
+             
+
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/recover-password" element={<RecoveredPassword />} />
@@ -57,6 +73,7 @@ const AppRoutes = () => {
                     </Routes>
                 </BrowserRouter>
             </GoogleOAuthProvider>
+
         </>
     );
 };
