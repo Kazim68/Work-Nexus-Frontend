@@ -16,6 +16,10 @@ import AttendanceDashboard from '../Components/LeaveModule/AttendanceDashoard/At
 import CompanyPolices from '../Components/CompanyPolices/Companypolicy';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 
+import Home from '../Components/LandingPages/Home/Home.jsx';
+import Modules from '../Components/LandingPages/Modules/Modules.jsx';
+import Aim from '../Components/LandingPages/Aim/Aim';
+import Services from '../Components/LandingPages/Services/Services';
 
 
 const AppRoutes = () => {
@@ -38,13 +42,15 @@ const AppRoutes = () => {
                     <Route path="/apply-leave" element={<ApplyLeave />} />
                     <Route path="/leave-status" element={<LeaveStatus />} />
 
-                    <Route path="/" element={<LeaveDashboard />} />
+                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
                     <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
                     <Route path="/company-policies" element={<CompanyPolices />} />
                     <Route path="/profile-setting" element={<ProfileDashboard />} />
 
-
-
+                    <Route path="/" element={< Home/>} />
+                    <Route path="/modules" element={< Modules/>} />
+                    <Route path="/aim" element={< Aim/>} />
+                    <Route path="/services" element={< Services/>} />
                 </Routes>
             </BrowserRouter>
         </>
