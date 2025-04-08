@@ -4,7 +4,7 @@ import { create } from '../../Api/Api';
 
 const PricingPlan = () => {
   const navigate = useNavigate();
-  
+  const employeeId = localStorage.getItem("employeee_id")
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState({ name: '', price: 0, features: [] });
 
@@ -17,10 +17,10 @@ const PricingPlan = () => {
     setIsModalOpen(false);
   };
 
-  const handleProceed = async(amount) => {
+  const handleProceed = async(amount , name) => {
     
       try {
-        const res = await create('/payment/create-checkout-session' , {amount:amount});
+        const res = await create('/payment/create-checkout-session' , {amount:amount , employeeId:employeeId , planType:name});
         window.location.href = res.data.url; // redirect to Stripe
       } catch (err) {
         console.error('Checkout error:', err);
@@ -38,18 +38,18 @@ const PricingPlan = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
         {[
           {
-            name: "Free Plan",
+            name: "starter",
             price: 0,
             features: ["5 Users", "Basic Support", "5GB Storage", "Basic Analytics"]
           },
           {
-            name: "Monthly",
+            name: "advance",
             price: 50,
             features: ["50 Users", "Priority Support", "50GB Storage", "Advanced Analytics"]
           },
           {
-            name: "Yearly (20% Off)",
-            price: 1000,
+            name: "pro",
+            price: 100,
             features: ["Unlimited Users", "Priority Support", "500GB Storage", "AI Insights"]
           }
         ].map((plan, index) => (
@@ -100,7 +100,7 @@ const PricingPlan = () => {
                 Close
               </button>
               <button
-                onClick={()=>handleProceed(selectedPlan.price)}
+                onClick={()=>handleProceed(selectedPlan.price , selectedPlan.name)}
                 className="py-2 px-4 bg-teal-500 text-white font-medium rounded-lg hover:bg-teal-700 transition duration-300"
               >
                 Proceed to Payment

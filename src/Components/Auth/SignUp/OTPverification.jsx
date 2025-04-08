@@ -20,7 +20,6 @@ export default function OTPVerification() {
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
-      localStorage.setItem("timer", timer);
       return () => clearInterval(interval);
     } else {
       setCanResend(true);
