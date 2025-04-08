@@ -37,7 +37,7 @@ const SignIn = () => {
 
     try {
       dispatch(signInStart());
-      const response = await create("/signin", { email:email, password:password });
+      const response = await create("/auth/signin", { email:email, password:password });
 
       if (response.status === 200) {
         

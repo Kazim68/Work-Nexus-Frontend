@@ -24,7 +24,7 @@ export default function PasswordReset() {
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['verify', token],
-    queryFn: () => fetchWithQueryParams('/verify-token', { token }), // Use object for query params
+    queryFn: () => fetchWithQueryParams('/reset-password/verify-token', { token }), // Use object for query params
     enabled: !!token,  // The query will only run if token exists
     staleTime: 0,
     cacheTime: 0,
@@ -79,7 +79,7 @@ export default function PasswordReset() {
 
     try {
       setIsSubmiting(true)
-      const response = await create("/reset-password", { email: email, password: newPassword });
+      const response = await create("/reset-password/update-password", { email: email, password: newPassword });
       if (response.status === 200) {
         toast.success(response.data.message);
         setIsSubmiting(false)

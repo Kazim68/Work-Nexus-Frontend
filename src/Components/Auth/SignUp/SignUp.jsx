@@ -69,9 +69,11 @@ const SignUp = () => {
         setIsSubmitting(true);
 
         try {
-            await create("/signUp", formData);
-            await create("/sendotp", { email: formData.email });
+            const response = await create("/auth/signUp", formData);
+            await create("/otp/sendotp", { email: formData.email });
             localStorage.setItem("email", formData.email);
+            localStorage.setItem("employeee_id", response.data.employeeId);
+
 
             navigate("/verify");
         } catch (error) {
