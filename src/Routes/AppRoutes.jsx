@@ -4,6 +4,8 @@ import SignUp from '../Components/Auth/SignUp/SignUp'; // Corrected the typo her
 import OTPVerification from '../Components/Auth/SignUp/OTPverification';
 import OrganizationInfo from '../Components/Auth/SignUp/OrganizationInfo';
 import SignIn from '../Components/Auth/SignIn/SignIn';
+
+
 import ForgotPassword from '../Components/Auth/SignIn/ForgotPassword';
 import RecoveredPassword from '../Components/Auth/SignIn/RecoveredPassword';
 import LeaveStatus from '../Components/LeaveModule/ReviewLeave/LeaveReview';
@@ -26,6 +28,7 @@ import Services from '../Components/LandingPages/Services/Services';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
 
+
 const AppRoutes = () => {
     return (
         <>
@@ -44,16 +47,16 @@ const AppRoutes = () => {
 
 
 
-                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
-                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
-                    <Route path="/company-policies" element={<CompanyPolices />} />
-                    <Route path="/profile-setting" element={<ProfileDashboard />} />
+                        <Route path="/leave-dashboard" element={<LeaveDashboard />} />
+                        <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+                        <Route path="/company-policies" element={<CompanyPolices />} />
+                        <Route path="/profile-setting" element={<ProfileDashboard />} />
 
-                    <Route path="/" element={< Home/>} />
-                    <Route path="/modules" element={< Modules/>} />
-                    <Route path="/aim" element={< Aim/>} />
-                    <Route path="/services" element={< Services/>} />
-             
+                        <Route path="/" element={< Home />} />
+                        <Route path="/modules" element={< Modules />} />
+                        <Route path="/aim" element={< Aim />} />
+                        <Route path="/services" element={< Services />} />
+
 
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -63,7 +66,6 @@ const AppRoutes = () => {
                         <Route path="/apply-leave" element={<ApplyLeave />} />
                         <Route path="/leave-status" element={<LeaveStatus />} />
 
-                        <Route path="/" element={<Loader />} />
                         <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
                         <Route path="/company-policies" element={<CompanyPolices />} />
                         <Route path="/profile-setting" element={<ProfileDashboard />} />

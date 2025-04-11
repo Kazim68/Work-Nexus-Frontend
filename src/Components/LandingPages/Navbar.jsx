@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from "../../assets/Landing Page Icons/Work Nexus Logo(cropped).png";
+import logo from "../../assets/Landing Page Icons/Work_Nexus_Logo.png";
 
 const Navbar = ({ navBg = "bg-black", navLinkColor = "text-white" }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

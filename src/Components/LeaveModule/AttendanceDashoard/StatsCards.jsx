@@ -11,12 +11,12 @@ const StatsCards = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 h-full">
       {stats.map((stat, index) => (
-        <div key={index} className="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 h-full">
-          <div className="flex justify-center items-center w-12 h-12 bg-gray-200 rounded-full">
+        <div key={index} className="border border-amber-600 p-4 rounded-lg shadow-md flex items-center gap-3 h-full">
+          <div className="flex justify-center items-center w-12 h-12  rounded-full">
             {stat.icon}
           </div>
           <div>
-            <p className="text-lg font-semibold">{stat.time}</p>
+            <p className="text-lg font-semibold text-white">{stat.time}</p>
             <p className="text-sm text-gray-500">{stat.label}</p>
           </div>
         </div>
