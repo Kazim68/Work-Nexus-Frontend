@@ -20,12 +20,11 @@ const ForgotPassword = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await create("reset-password/send-recovery-link", { email:email });
+      const response = await create("reset-password/send-recovery-link", { email: email });
 
       if (response.status === 200) {
         toast.success("Email sent successfully!");
-        localStorage.setItem("email" , email)
-
+        localStorage.setItem("email", email);
       } else {
         toast.error("Failed to send OTP.");
       }
@@ -38,36 +37,38 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-end h-screen bg-gray-300 p-4 pr-16">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-[670px] h-[730px] flex flex-col items-center">
-        <div className="flex w-full justify-end mb-8">
+    <div className="flex items-center justify-center h-screen bg-[#212020] p-4 pr-16">
+      <div className="bg-[#212020] p-10 border border-amber-600 rounded-lg shadow-lg flex flex-col items-center">
+        <div className="flex w-full justify-center mb-8">
           <img src={LockIcon} alt="Lock Icon" className="w-24 h-24" />
         </div>
 
-        <h2 className="text-2xl font-bold text-center mb-3 mt-4">
+        <h2 className="text-2xl font-extrabold text-center mb-3 mt-4 text-amber-600">
           Oh No! You Forgot Your Password.
         </h2>
-        <p className="text-lg font-semibold text-center mb-6">
+        <p className="text-lg font-semibold text-center mb-6 text-white">
           Don’t Worry, We Got Backups.
         </p>
 
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col">
+          {/* Email Input */}
+          <label className="block text-white text-lg font-medium mb-2">
             Email
           </label>
           <input
             type="email"
             placeholder="Enter your Email here"
-            className="w-3/4 p-4 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-6 text-lg"
+            className="w-full p-4 rounded-lg bg-[#212020] border border-amber-600 placeholder-white text-sm text-white focus:outline-none focus:ring focus:ring-amber-600 mb-6"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-3/4 bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700 transition duration-300 flex justify-center items-center gap-2"
+            className="w-full cursor-pointer bg-amber-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-amber-700 transition-all duration-300 flex justify-center items-center gap-2"
           >
             {isSubmitting ? <ButtonLoader /> : "Send Email →"}
           </button>

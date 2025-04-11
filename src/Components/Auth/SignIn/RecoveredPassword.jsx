@@ -17,10 +17,10 @@ export default function PasswordReset() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [isTokenValid, setIsTokenValid] = useState(true); // Flag for token validity
-  const [IsSubmiting, setIsSubmiting] = useState(false)
+  const [IsSubmiting, setIsSubmiting] = useState(false);
 
   const token = new URLSearchParams(window.location.search).get('token');
-  const email = localStorage.getItem("email")
+  const email = localStorage.getItem("email");
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['verify', token],
@@ -40,7 +40,7 @@ export default function PasswordReset() {
     } else if (error) {
       console.error("Error:", error);
       toast.error("Invalid or expired token.");
-      setIsTokenValid(false)
+      setIsTokenValid(false);
     }
   }, [data, error, isLoading, navigate]);
 
@@ -53,10 +53,9 @@ export default function PasswordReset() {
     );
   }
 
-
   // Render error or success states
   if (!isTokenValid) {
-    return <Error404/>;
+    return <Error404 />;
   }
 
   // Handle form submission
@@ -78,36 +77,31 @@ export default function PasswordReset() {
     }
 
     try {
-      setIsSubmiting(true)
+      setIsSubmiting(true);
       const response = await create("/reset-password/update-password", { email: email, password: newPassword });
       if (response.status === 200) {
         toast.success(response.data.message);
-        setIsSubmiting(false)
+        setIsSubmiting(false);
         localStorage.removeItem("email");
         navigate("/signin");
-
       } else {
-        setIsSubmiting(false)
+        setIsSubmiting(false);
         toast.error(response.data);
       }
     } catch (error) {
-      setIsSubmiting(false)
-
+      setIsSubmiting(false);
       console.error("Error verifying OTP:", error);
       toast.error(error.message || "Something went wrong. Please try again.");
     }
-
   };
 
   if (!isTokenValid) {
     return null; // If token is not valid, don't show the form (or navigate to 404 page)
   }
 
-
-
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-300 p-4">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-[670px] h-[730px]">
+    <div className="flex items-center justify-center h-screen bg-[#212020] p-4">
+      <div className="bg-[#212020] border border-amber-600 p-10 rounded-lg shadow-lg">
         <div className="flex justify-end mb-8">
           <img
             src={keyIcon}
@@ -116,65 +110,55 @@ export default function PasswordReset() {
           />
         </div>
 
-        <h2 className="text-2xl font-semibold mb-4">Reset Your Password</h2>
-        <p className="text-xl font-medium mb-6">Please enter a new password and confirm it.</p>
+        <h2 className="text-2xl font-semibold mb-4 text-amber-600">Reset Your Password</h2>
+        <p className="text-xl font-medium mb-6 text-white">Please enter a new password and confirm it.</p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">New Password</label>
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={`w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${errors.newPassword ? "focus:ring-red-500" : "focus:ring-teal-500"}`}
-                placeholder="Enter new password"
-                required
-                minLength={6}
-              />
-              <img
-                src={showPassword ? "https://img.icons8.com/ios-glyphs/30/000000/invisible.png" : "https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png"}
-                alt="eye"
-                className="absolute right-3 top-3 cursor-pointer"
-                onClick={() => setShowPassword(!showPassword)}
-              />
-            </div>
-            {errors.newPassword && <p className="text-red-500 text-xs mt-2">{errors.newPassword}</p>}
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className={`w-full p-4 rounded-lg bg-[#212020] border border-amber-600 placeholder-white text-sm text-white focus:outline-none focus:ring focus:ring-amber-600 mb-2`}
+              placeholder="Enter new password"
+            />
+            <img
+              src={showPassword ? "https://img.icons8.com/ios-glyphs/30/d97706/invisible.png" : "https://img.icons8.com/ios-glyphs/30/d97706/visible--v1.png"}
+              alt="eye"
+              className="absolute right-3 top-3 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+            {errors.newPassword && <p className="text-red-500 text-xs mt-1">{errors.newPassword}</p>}
           </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <div className="relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={`w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${errors.confirmPassword ? "focus:ring-red-500" : "focus:ring-teal-500"}`}
-                placeholder="Confirm your password"
-                required
-              />
-              <img
-                src={showConfirmPassword ? "https://img.icons8.com/ios-glyphs/30/000000/invisible.png" : "https://img.icons8.com/ios-glyphs/30/000000/visible--v1.png"}
-                alt="eye"
-                className="absolute right-3 top-3 cursor-pointer"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              />
-            </div>
-            {errors.confirmPassword && <p className="text-red-500 text-xs mt-2">{errors.confirmPassword}</p>}
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={`w-full p-4 rounded-lg bg-[#212020] border border-amber-600 placeholder-white text-sm text-white focus:outline-none focus:ring focus:ring-amber-600 mb-2`}
+              placeholder="Confirm your password"
+            />
+            <img
+              src={showConfirmPassword ? "https://img.icons8.com/ios-glyphs/30/d97706/invisible.png" : "https://img.icons8.com/ios-glyphs/30/d97706/visible--v1.png"}
+              alt="eye"
+              className="absolute right-3 top-3 cursor-pointer"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+            {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-teal-700"
+            className="w-full bg-amber-600 cursor-pointer text-white py-3 rounded-lg text-lg font-medium hover:bg-amber-700"
           >
             {IsSubmiting ? (
               <ButtonLoader />
             ) : (
               "Reset Password"
             )}
-            Reset Password
           </button>
         </form>
       </div>

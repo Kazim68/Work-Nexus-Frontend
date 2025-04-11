@@ -55,7 +55,7 @@ const GoolgeLogin = (props) => {
             <button
                 onClick={googleLogin}
                 type="button"
-                className="w-full cursor-pointer w-full  flex items-center justify-center gap-3 py-3 px-23 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition duration-200"
+                className="mt-1 tracking-wide font-semibold bg-white text-gray-100 w-full py-4 rounded-lg hover:bg-gray-300 cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
             >
                 <img
                     src="https://img.icons8.com/color/48/000000/google-logo.png"

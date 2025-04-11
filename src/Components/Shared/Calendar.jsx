@@ -16,22 +16,22 @@ const Calendar = ({ width , height ,ch }) => {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className={`bg-white shadow-lg rounded-xl p-5 ${width} ${height}`}>
+    <div className={`shadow-lg rounded-xl p-5 ${width} ${height} border border-amber-600`}>
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <button onClick={prevMonth} className="text-teal-600 text-xl hover:text-teal-800">
+        <button onClick={prevMonth} className="text-amber-600 text-xl hover:text-amber-800">
           <MdKeyboardArrowLeft />
         </button>
-        <h2 className="text-lg font-semibold text-teal-700">
+        <h2 className="text-lg font-semibold text-white">
           {currentDate.format("MMMM YYYY")}
         </h2>
-        <button onClick={nextMonth} className="text-teal-600 text-xl hover:text-teal-800">
+        <button onClick={nextMonth} className="text-amber-600 text-xl hover:text-amber-800">
           <MdKeyboardArrowRight />
         </button>
       </div>
 
       {/* Week Days */}
-      <div className="grid grid-cols-7 text-gray-600 text-sm font-medium mb-2">
+      <div className="grid grid-cols-7 text-white text-sm font-medium mb-2">
         {days.map((day) => (
           <div key={day} className="text-center">{day}</div>
         ))}
@@ -50,8 +50,8 @@ const Calendar = ({ width , height ,ch }) => {
               className={`${ch} flex items-center justify-center rounded-lg cursor-pointer transition 
               ${
                 isToday
-                  ? "bg-teal-500 text-white font-bold shadow-md"
-                  : "hover:bg-teal-100 text-gray-700"
+                  ? "bg-amber-500 text-white font-bold shadow-md"
+                  : "hover:bg-amber-300 text-white"
               }`}
             >
               {day}

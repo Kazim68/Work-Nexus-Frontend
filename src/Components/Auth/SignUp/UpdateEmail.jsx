@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import ButtonLoader from '../../Shared/ButtonLoader';
 
-const SendOtp = () => {
+const UpdateEmail = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -26,6 +26,7 @@ const SendOtp = () => {
     }
     return tempErrors;
   };
+
   const sendOtp = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -66,17 +67,21 @@ const SendOtp = () => {
 
   return (
     <div>
-      <form onSubmit={sendOtp} className="space-y-4">
+      <div className="text-center mb-4">
+        <p className="text-sm text-white">
+          Entered the wrong email? Don't worry, we're here to help you update it!
+        </p>
+      </div>
+      
+      <form onSubmit={sendOtp} className="space-y-4 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
           <input
+            className="w-full px-5 py-3 rounded-lg font-medium bg-[#212020] border border-amber-600 placeholder-white text-sm text-white focus:outline-none focus:ring focus:ring-amber-600"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter your Email here"
-            className={`w-full p-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${errors.email ? 'focus:ring-red-500' : 'focus:ring-teal-500'
-              }`}
           />
           {errors.email && (
             <p className="text-red-500 text-xs">{errors.email}</p>
@@ -86,13 +91,13 @@ const SendOtp = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="cursor-pointer w-full bg-teal-600 text-white py-3 rounded-lg text-lg font-medium flex justify-center items-center gap-2 hover:bg-teal-700"
+          className="w-full font-bold bg-amber-600 text-gray-100 py-4 rounded-lg hover:bg-amber-700 cursor-pointer transition-all duration-300 ease-in-out  focus:shadow-outline focus:outline-none"
         >
-          {isSubmitting ? <ButtonLoader /> : 'Send OTP →'}
+          {isSubmitting ? <ButtonLoader /> : 'Send OTP'}
         </button>
       </form>
     </div>
   );
 };
 
-export default SendOtp;
+export default UpdateEmail;

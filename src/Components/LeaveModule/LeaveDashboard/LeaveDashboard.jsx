@@ -7,6 +7,7 @@ import AttendanceChart from './AttendanceChart'
 import ProjectPieChart from './ProjectPieChart'
 import ActionCards from './ActionCards'
 import { useSelector } from 'react-redux'
+import PayslipList from './PayslipList'
 
 
 const Main = () => {
@@ -61,48 +62,17 @@ const Main = () => {
 
 
             <div className="p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 custom-layout">
-                    {/* Attendance Chart */}
-                    <div className="bg-white p-4 lg:w-100 rounded-lg shadow-md min-h-[350px]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Attendance Chart - 2/3 width on md+ screens */}
+                    <div className="md:col-span-2 border border-amber-600 p-4 rounded-lg shadow-md min-h-[350px]">
                         <AttendanceChart />
                     </div>
 
-                    {/* Project Pie Chart */}
-                    <div className="bg-white p-4 lg:w-100 rounded-lg shadow-md min-h-[350px] flex flex-col items-center">
-                        <h2 className="text-lg font-semibold mb-2">My Current Project</h2>
-                        <div className="w-full max-w-xs">
-                            <ProjectPieChart />
-                        </div>
-                        <button className="mt-4 bg-blue-400 text-white px-4 py-2 rounded-md">Project 1</button>
-                        <button className="mt-2 bg-blue-400 text-white px-4 py-2 rounded-md">HRMS PROJECT</button>
-                    </div>
-
-                    {/* Calendar (Only for screens > 1050px) */}
-                    <div className="hidden lg:block calendar-container">
-                        <Calendar width="w-100" height="h-[350px]" ch='h-8' />
+                    {/* Payslip List - 1/3 width on md+ screens */}
+                    <div className="rounded-lg shadow-md  max-h-[360px] overflow-y-auto">
+                        <PayslipList />
                     </div>
                 </div>
-
-                <style>
-                    {`
-            @media (max-width: 1050px) {
-                .calendar-container {
-                    display: none;
-                }
-                .custom-layout {
-                    grid-template-columns: 1fr 1fr !important;
-                }
-                body{
-                overflow-x:hidden}
-            }
-
-            @media (min-width: 1051px) {
-                .custom-layout {
-                    grid-template-columns: repeat(3, 1fr) !important;
-                }
-            }
-        `}
-                </style>
             </div>
 
 
