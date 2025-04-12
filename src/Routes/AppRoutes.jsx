@@ -19,7 +19,7 @@ import CompanyPolices from '../Components/CompanyPolices/CompanyPolicy.jsx';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
-
+import CompanyReg from '../Components/Company/CompanyReg.jsx'
 import Home from '../Components/LandingPages/Home/Home.jsx';
 import Modules from '../Components/LandingPages/Modules/Modules.jsx';
 import Aim from '../Components/LandingPages/Aim/Aim';
@@ -41,7 +41,7 @@ const AppRoutes = () => {
                         <Route path="/verify" element={<OTPVerification />} />
                         <Route path="/update-email" element={<NewMail />} />
 
-                        <Route path="/orgInfo" element={<OrganizationInfo />} />
+                        <Route path="/orgInfo" element={<CompanyReg />} />
                         <Route path="/pricing-plan" element={<PricingPlan />} />
                         <Route path="/payment" element={<PaymentSetup />} />
 

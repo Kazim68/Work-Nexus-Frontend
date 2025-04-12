@@ -53,6 +53,7 @@ export const create = async (url, data) => {
     return response;
   } catch (error) {
     if (error.response) {
+      
       const errorMessage = error.response.data.message || "An error occurred";
       throw new Error(errorMessage);
     }
@@ -65,6 +66,36 @@ export const create = async (url, data) => {
     }
   }
 };
+
+export const createWithAuth = async (url, data, config = {}) => {
+  try {
+    const response = await apiClient.post(url, data, config);
+    return response;
+  } catch (error) {
+    if (error.response) {
+      const errorMessage = error.response.data.message || "An error occurred";
+      throw new Error(errorMessage);
+    } else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    } else {
+      throw new Error(error.message || "Something went wrong.");
+    }
+  }
+};
+
+
+export const upload = async (url, data, config = {}) => {
+  try {
+    const response = await apiClient.post(url, data, config);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.response?.data?.message || "Upload failed");
+  }
+};
+
+
+
 
 
 // Update an existing item by ID (PUT request) at a given URL
