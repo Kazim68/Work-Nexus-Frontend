@@ -30,6 +30,10 @@ export default function PasswordReset() {
     cacheTime: 0,
   });
 
+  if(!token){
+    return <Error404 />;
+  }
+
   useEffect(() => {
     if (isLoading) {
       return;

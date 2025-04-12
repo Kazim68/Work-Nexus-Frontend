@@ -32,13 +32,20 @@ const SignIn = () => {
             if (response.status === 200) {
                 dispatch(signInSuccess(response.data));
                 toast.success("Login successful!");
-                navigate("/orgInfo");
+
+                if(!response.data.employee.companyID && response.data.employee.userRole == 'admin')
+                {
+                    navigate("/orgInfo")
+                }else{
+                    navigate("/attendance-dashboard")
+                }
             } else {
                 toast.error(response.data.message || "Login failed.");
             }
         } catch (err) {
+            console.log(err)
             dispatch(signInFailure(err.message || "An unexpected error occurred"));
-            toast.error(err.response?.data?.message || "Something went wrong.");
+            toast.error(err.message || "Something went wrong.");
         } finally {
             setIsSubmitting(false);
         }
