@@ -5,7 +5,7 @@ import { create } from "../../../Api/Api"; // Import the generalized API functio
 import { toast } from "react-toastify"; // For notifications
 import ButtonLoader from "../../Shared/ButtonLoader";
 import GoogleLogin from './GoogleLogin';
-import illustration from '../../../assets/images/illustration.png'
+import illustration from '../../../assets/images/Illustration.png'
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);

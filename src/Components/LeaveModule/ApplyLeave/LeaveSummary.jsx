@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState  } from "react";
+import { getUserInfo } from '../../../utils/getUserInfo.js';
+import { getLeaveSummary } from '../../../Api/Employee/Leaves.js';
 
 const LeaveSummary = () => {
-  const leaveData = [
-    { title: "Leave Taken", value: 10 },
-    { title: "Total Leave", value: 30 },
-    { title: "Casual Leaves Left", value: 5 },
-    { title: "Sick Leave Left", value: 5 },
-  ];
+  const userInfo = getUserInfo();
+  const [leaveSummary, setLeaveSummary] = useState(null);
 
+  useEffect(() => {
+    const fetchLeaveSummary = async () => {
+      try {
+        const response = await getLeaveSummary();
+        console.log(response);
+        if (response?.success) {
+          setLeaveSummary(response.leaveSummary);
+        }
+      } catch (error) {
+        console.error("Error fetching leave summary:", error);
+      }
+    };
+
+    fetchLeaveSummary();
+  }, []);
+
+  const leaveData = [
+    { title: "Leave Taken", value: (leaveSummary?.LeavesTaken || 0)},
+    { title: "Annual Leave", value: leaveSummary?.AnnualLeaves || 0 },
+    { title: "Unpaid Leaves", value: leaveSummary?.UnpaidLeaves || 0 },
+    { title: "Sick Leave", value: leaveSummary?.SickLeaves || 0 },
+  ];
   return (
     <div className="shadow-md p-4 rounded-lg w-80 h-[333px] border border-amber-600">
       <h2 className="text-white font-semibold mb-4 text-center">Leave Summary</h2>

@@ -1,12 +1,11 @@
 import { FaCalendarTimes, FaCalendarCheck, FaBalanceScale, FaHeartbeat } from "react-icons/fa";
 
-
-const LeaveStats = () => {
+const LeaveStats = ({ leaveSummary }) => {
   const stats = [
-    { icon: <FaCalendarTimes className="text-red-400 text-3xl" />, value: "10", label: "Leave Taken" },
-    { icon: <FaCalendarCheck className="text-green-400 text-3xl" />, value: "30", label: "Total Leave" },
-    { icon: <FaBalanceScale className="text-red-500 text-3xl" />, value: "05", label: "Leave Balance" },
-    { icon: <FaHeartbeat className="text-yellow-400 text-3xl" />, value: "05", label: "Sick Leave" },
+    { icon: <FaCalendarTimes className="text-red-400 text-3xl" />, value: leaveSummary?.LeavesTaken || 0, label: "Leave Taken" },
+    { icon: <FaCalendarCheck className="text-green-400 text-3xl" />, value: leaveSummary?.AnnualLeaves || 0, label: "Total Leave" },
+    { icon: <FaBalanceScale className="text-red-500 text-3xl" />, value: leaveSummary?.AnnualLeaves - leaveSummary?.LeavesTaken || 0, label: "Leave Balance" },
+    { icon: <FaHeartbeat className="text-yellow-400 text-3xl" />, value: leaveSummary?.SickLeaves, label: "Sick Leave" },
   ];
 
   return (

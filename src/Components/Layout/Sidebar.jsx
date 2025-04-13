@@ -10,7 +10,7 @@ import {
 import { IoMdPerson } from "react-icons/io";
 
 const menuItems = [
-  { name: "Dashboard", icon: <FaThLarge />, link: "/" },
+  { name: "Dashboard", icon: <FaThLarge />, link: "/dashboard" },
   { 
     name: "My Project", 
     icon: <MdOutlineWork />, 
