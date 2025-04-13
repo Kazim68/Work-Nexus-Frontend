@@ -20,10 +20,7 @@ import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
 import CompanyReg from '../Components/Company/CompanyReg.jsx'
-import Home from '../Components/LandingPages/Home/Home.jsx';
-import Modules from '../Components/LandingPages/Modules/Modules.jsx';
-import Aim from '../Components/LandingPages/Aim/Aim';
-import Services from '../Components/LandingPages/Services/Services';
+import LandingRoutes from "../Components/LandingPages/LandingRoutes.jsx";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
@@ -52,10 +49,7 @@ const AppRoutes = () => {
                         <Route path="/company-policies" element={<CompanyPolices />} />
                         <Route path="/profile-setting" element={<ProfileDashboard />} />
 
-                        <Route path="/" element={< Home />} />
-                        <Route path="/modules" element={< Modules />} />
-                        <Route path="/aim" element={< Aim />} />
-                        <Route path="/services" element={< Services />} />
+                        <Route path="/" element={<LandingRoutes />} />
 
 
                         <Route path="/signin" element={<SignIn />} />
