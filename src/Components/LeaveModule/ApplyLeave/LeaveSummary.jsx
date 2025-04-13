@@ -3,7 +3,7 @@ import { getUserInfo } from '../../../utils/getUserInfo.js';
 import { getLeaveSummary } from '../../../Api/Employee/Leaves.js';
 
 const LeaveSummary = () => {
-  const userInfo = getUserInfo(); 
+  const userInfo = getUserInfo();
   const [leaveSummary, setLeaveSummary] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const LeaveSummary = () => {
   }, []);
 
   const leaveData = [
-    { title: "Leave Taken", value: (leaveSummary.LeavesTaken || 0)},
+    { title: "Leave Taken", value: (leaveSummary?.LeavesTaken || 0)},
     { title: "Annual Leave", value: leaveSummary?.AnnualLeaves || 0 },
     { title: "Unpaid Leaves", value: leaveSummary?.UnpaidLeaves || 0 },
     { title: "Sick Leave", value: leaveSummary?.SickLeaves || 0 },
