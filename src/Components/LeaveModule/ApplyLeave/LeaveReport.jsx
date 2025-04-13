@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { getLeaveReport, cancelLeaveRequest } from "../../../Api/Employee/leaves";
+import { getLeaveReport, cancelLeaveRequest } from "../../../Api/Employee/Leaves.js";
 import { toast } from "react-toastify";
 
 
