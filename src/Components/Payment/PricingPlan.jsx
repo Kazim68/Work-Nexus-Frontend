@@ -1,10 +1,77 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
+import { create, createWithAuth } from "../../Api/Api";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { create } from '../../Api/Api';
+import { toast } from "react-toastify";
 
 const PricingPlan = () => {
+
+  const { data } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const employeeId = localStorage.getItem("employeee_id")
+
+
+  useEffect(() => {
+    if (!data || !data.token) {
+      toast.error("Unauthorized, Sign in again");
+      navigate("/signin");
+    }
+  }, [data, navigate]);
+
+
+  const plans = [
+    {
+      title: "BASIC",
+      subtitle: "for small websites or blogs",
+      price: 2,
+      color: "#0891b2",
+      features: [
+        "1 domain name",
+        "10 GB of disk space",
+        "100GB of bandwidth",
+        "1 MySQL database",
+        "5 email accounts",
+        "cPanel control panel",
+        "Free SSL certificate",
+        "24/7 support",
+      ],
+    },
+    {
+      title: "STANDARD",
+      subtitle: "for medium-sized businesses",
+      price: 5,
+      color: "#059669",
+      features: [
+        "Unlimited domain name",
+        "50 GB of disk space",
+        "500GB of bandwidth",
+        "10 MySQL database",
+        "50 email accounts",
+        "cPanel control panel",
+        "Free SSL certificate",
+        "24/7 support",
+      ],
+    },
+    {
+      title: "PREMIUM",
+      subtitle: "for small businesses",
+      price: 10,
+      color: "#c026d3",
+      features: [
+        "Unlimited domain name",
+        "100 GB of disk space",
+        "1TB of bandwidth",
+        "Unlimited MySQL database",
+        "Unlimited email accounts",
+        "cPanel control panel",
+        "Free SSL certificate",
+        "24/7 priority support",
+        "Advanced security features",
+      ],
+    },
+  ];
+
+  const employeeId = data.employee._id
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState({ name: '', price: 0, features: [] });
 
@@ -17,99 +84,75 @@ const PricingPlan = () => {
     setIsModalOpen(false);
   };
 
-  const handleProceed = async(amount , name) => {
-    
-      try {
-        const res = await create('/payment/create-checkout-session' , {amount:amount , employeeId:employeeId , planType:name});
-        window.location.href = res.data.url; // redirect to Stripe
-      } catch (err) {
-        console.error('Checkout error:', err);
-        alert('Payment failed');
-      }
-    
+  const handleProceed = async (amount, name) => {
+    console.log(amount)
+    try {
+      const res = await createWithAuth('/payment/create-checkout-session', { amount: amount, employeeId: employeeId, planType: name }, {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        }
+      });
+      window.location.href = res.data.url; // redirect to Stripe
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Payment failed');
+    }
+
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center">
-        Choose A Pricing Plan For Your Organization
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
-        {[
-          {
-            name: "starter",
-            price: 0,
-            features: ["5 Users", "Basic Support", "5GB Storage", "Basic Analytics"]
-          },
-          {
-            name: "advance",
-            price: 50,
-            features: ["50 Users", "Priority Support", "50GB Storage", "Advanced Analytics"]
-          },
-          {
-            name: "pro",
-            price: 100,
-            features: ["Unlimited Users", "Priority Support", "500GB Storage", "AI Insights"]
-          }
-        ].map((plan, index) => (
+    <section className="min-h-screen grid place-items-center px-4 py-8">
+      <div className="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
+        {plans.map((plan, index) => (
           <div
             key={index}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-teal-500 text-center hover:shadow-2xl transition duration-300"
+            className="relative w-[300px] p-6 pb-20 rounded-md border text-center transition-all hover:-translate-y-2 hover:scale-[1.015] hover:bg-opacity-50 hover:shadow-lg"
+            style={{
+              borderColor: plan.color,
+              backgroundColor: "rgba(38, 38, 38, 0.125)",
+            }}
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">{plan.name}</h3>
-            <p className="text-gray-600 mb-6">Great for {index === 0 ? "individuals" : index === 1 ? "businesses" : "teams"}.</p>
-            <ul className="space-y-3 text-gray-700 text-left">
-              {plan.features.map((feature, idx) => (
-                <li key={idx}>✅ {feature}</li>
+            <div className="mb-6">
+              <h4 className="text-xl font-semibold" style={{ color: plan.color }}>
+                {plan.title}
+              </h4>
+              <p className="text-xs text-gray-400">{plan.subtitle}</p>
+            </div>
+
+            <p
+              className="text-[40px] font-bold mb-6 relative"
+              style={{ color: plan.color }}
+            >
+              ${plan.price}
+              <sub className="absolute bottom-1 text-xs text-gray-400 font-light">
+                /month
+              </sub>
+            </p>
+
+            <ul className="text-left mb-6 space-y-3 text-sm">
+              {plan.features.map((feature, i) => (
+                <li key={i} className="text-gray-400">
+                  <FaCheck className="inline text-white mr-2" />
+                  <strong className="text-white">{feature}</strong>
+                </li>
               ))}
             </ul>
+
             <button
-              onClick={() => handlePricingPlan(plan.name, plan.price, plan.features)}
-              className="mt-6 w-full py-3 bg-teal-500 text-white font-medium rounded-xl hover:bg-teal-700 transition duration-300 cursor-pointer"
+              className="absolute bottom-6 left-1/2 cursor-pointer transform -translate-x-1/2 w-40 py-2 rounded border text-sm font-semibold"
+              style={{
+                backgroundColor: plan.color,
+                borderColor: plan.color,
+                color: "#e4e4e7",
+              }}
+              onClick={() => handleProceed(plan.price, plan.title.toLowerCase())}
             >
-              {plan.name === "Free Plan" ? "Get Started" : "Choose Plan"}
+              SELECT
             </button>
           </div>
         ))}
       </div>
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300">
-          <div className="bg-white p-8 rounded-3xl shadow-xl w-96 transform transition-all duration-300 scale-100 opacity-100">
-            <h3 className="text-3xl font-semibold text-teal-600 mb-4">{selectedPlan.name}</h3>
-            <p className="text-xl text-gray-700 mb-6">Price: <span className="text-teal-600">${selectedPlan.price}</span> per month</p>
-            <div className="text-gray-600 mb-6">
-              <h4 className="font-semibold text-lg mb-2">Plan Features:</h4>
-              <ul className="space-y-2">
-                {selectedPlan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center">
-                    <span className="text-teal-500 mr-2">✅</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="text-center">
-              <button
-                onClick={handleCloseModal}
-                className="py-2 px-4 bg-gray-500 text-white font-medium rounded-lg hover:bg-gray-600 transition duration-300 mr-4"
-              >
-                Close
-              </button>
-              <button
-                onClick={()=>handleProceed(selectedPlan.price , selectedPlan.name)}
-                className="py-2 px-4 bg-teal-500 text-white font-medium rounded-lg hover:bg-teal-700 transition duration-300"
-              >
-                Proceed to Payment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+    </section>
   );
 };
 

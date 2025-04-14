@@ -11,16 +11,18 @@ const Services = () => {
       className="min-h-screen bg-cover bg-center text-white relative"
       style={{ backgroundImage: `url(${bgServices})` }}
     >
-        <Navbar />
+      <Navbar />
       {/* Main content area */}
       <main className="flex flex-col md:flex-row items-center justify-center p-8 pt-36 relative">
         {/* Left Side */}
         <div className="md:w-1/2 relative flex justify-center items-center">
           <div className="relative w-full max-w-md">
 
-            {/* Lines */}
+            {/* Top Orange Corner */}
             <div className="absolute top-0 left-0 md:w-24 md:h-28 w-16 h-20 border-t-4 border-l-4 border-orange-500 z-0"></div>
-            <div className="absolute bottom-0 right-0 md:w-24 md:h-28 w-16 h-20 border-b-4 border-r-4 border-orange-500 z-0"></div>
+
+            {/* Bottom Orange Corner - moved slightly down */}
+            <div className="absolute -bottom-6 right-0 md:w-24 md:h-28 w-16 h-20 border-b-4 border-r-4 border-orange-500 z-0"></div>
 
             {/* Top Image */}
             <img
@@ -28,14 +30,16 @@ const Services = () => {
               alt="Illustration 1"
               className="w-[75%] object-contain relative z-10"
             />
-            {/* Bottom Image */}
+
+            {/* Bottom Image - moved slightly up and left */}
             <img
               src={service2}
               alt="Illustration 2"
-              className="w-[75%] object-contain relative z-0 mt-[-50px] transform translate-x-[4rem] md:translate-x-[6rem]"
+              className="w-[75%] object-contain relative z-0 mt-[-70px] transform translate-x-[3rem] md:translate-x-[5rem]"
             />
           </div>
         </div>
+
 
 
         {/* Right Side */}

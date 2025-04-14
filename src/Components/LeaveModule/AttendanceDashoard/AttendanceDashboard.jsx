@@ -12,7 +12,7 @@ const Dashboard = () => {
                     
                     {/* Attendance Chart */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white shadow-lg rounded-lg p-4 w-full min-h-[400px] flex">
+                        <div className="border border-amber-600 shadow-lg rounded-lg p-4 w-full min-h-[400px] flex">
                             <MonthlyAttendanceInfo />
                         </div>
                     </div>
@@ -29,7 +29,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Attendance Summary Table */}
-                <div className="mt-4 w-full">
+                <div className="mt-4 w-full border border-amber-600 rounded-lg">
                     <AttendanceSummary />
                 </div>
             </div>

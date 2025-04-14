@@ -4,6 +4,8 @@ import SignUp from '../Components/Auth/SignUp/SignUp'; // Corrected the typo her
 import OTPVerification from '../Components/Auth/SignUp/OTPverification';
 import OrganizationInfo from '../Components/Auth/SignUp/OrganizationInfo';
 import SignIn from '../Components/Auth/SignIn/SignIn';
+
+
 import ForgotPassword from '../Components/Auth/SignIn/ForgotPassword';
 import RecoveredPassword from '../Components/Auth/SignIn/RecoveredPassword';
 import LeaveStatus from '../Components/LeaveModule/ReviewLeave/LeaveReview';
@@ -17,14 +19,13 @@ import CompanyPolices from '../Components/CompanyPolices/CompanyPolicy.jsx';
 import ProfileDashboard from '../Components/ProfileDashboard/ProfileDashboard';
 import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
-
-import Home from '../Components/LandingPages/Home/Home.jsx';
-import Modules from '../Components/LandingPages/Modules/Modules.jsx';
-import Aim from '../Components/LandingPages/Aim/Aim';
-import Services from '../Components/LandingPages/Services/Services';
+import CompanyReg from '../Components/Company/CompanyReg.jsx'
+import LandingRoutes from "../Components/LandingPages/LandingRoutes.jsx";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
+import EmployeeOnBoard from '../Components/Employee/EmployeeOnBoard.jsx';
+
 
 const AppRoutes = () => {
     return (
@@ -38,22 +39,19 @@ const AppRoutes = () => {
                         <Route path="/verify" element={<OTPVerification />} />
                         <Route path="/update-email" element={<NewMail />} />
 
-                        <Route path="/orgInfo" element={<OrganizationInfo />} />
+                        <Route path="/orgInfo" element={<CompanyReg />} />
                         <Route path="/pricing-plan" element={<PricingPlan />} />
                         <Route path="/payment" element={<PaymentSetup />} />
 
 
 
-                    <Route path="/leave-dashboard" element={<LeaveDashboard />} />
-                    <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />               
-                    <Route path="/company-policies" element={<CompanyPolices />} />
-                    <Route path="/profile-setting" element={<ProfileDashboard />} />
+                        <Route path="/dashboard" element={<LeaveDashboard />} />
+                        <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+                        <Route path="/company-policies" element={<CompanyPolices />} />
+                        <Route path="/profile-setting" element={<ProfileDashboard />} />
 
-                    <Route path="/" element={< Home/>} />
-                    <Route path="/modules" element={< Modules/>} />
-                    <Route path="/aim" element={< Aim/>} />
-                    <Route path="/services" element={< Services/>} />
-             
+                        <Route path="/" element={<LandingRoutes />} />
+
 
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -63,10 +61,13 @@ const AppRoutes = () => {
                         <Route path="/apply-leave" element={<ApplyLeave />} />
                         <Route path="/leave-status" element={<LeaveStatus />} />
 
-                        <Route path="/" element={<Loader />} />
                         <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
                         <Route path="/company-policies" element={<CompanyPolices />} />
                         <Route path="/profile-setting" element={<ProfileDashboard />} />
+
+
+                        <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
+
 
 
 

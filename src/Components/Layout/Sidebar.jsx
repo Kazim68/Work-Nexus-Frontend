@@ -10,7 +10,7 @@ import {
 import { IoMdPerson } from "react-icons/io";
 
 const menuItems = [
-  { name: "Dashboard", icon: <FaThLarge />, link: "/" },
+  { name: "Dashboard", icon: <FaThLarge />, link: "/dashboard" },
   { 
     name: "My Project", 
     icon: <MdOutlineWork />, 
@@ -58,7 +58,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <>
       {/* Sidebar positioned below the navbar */}
       <div
-        className={`fixed left-0 bg-white shadow-lg p-4 w-56 transform ${
+        className={`fixed left-0 text-white bg-[#] shadow-lg p-4 w-56 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-40`}
       >
@@ -67,7 +67,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             {menuItems.map((item, index) => (
               <li key={index} className="mb-4">
                 <div
-                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+                  className="flex items-center space-x-3 p-2 rounded-lg hover:bg-[#3f3d3d]  cursor-pointer"
                   onClick={() => (item.dropdown ? toggleDropdown(index) : handleNavigation(item.link))}
                 >
                   <span className="text-lg">{item.icon}</span>
@@ -83,10 +83,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     {item.dropdown.map((subItem, subIndex) => (
                       <li 
                         key={subIndex} 
-                        className="p-2 rounded-lg hover:bg-gray-200 cursor-pointer"
+                        className="p-2 rounded-lg hover:bg-[#3f3d3d] hover:text-amber-600 cursor-pointer"
                         onClick={() => handleNavigation(subItem.link)}
                       >
-                        <span className="block text-gray-700 text-sm">{subItem.name}</span>
+                        <span className="block text-white text-sm">{subItem.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -100,7 +100,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Overlay when Sidebar is open on mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
+          className="fixed inset-0 bg-[#212020] bg-opacity-50 md:hidden"
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
