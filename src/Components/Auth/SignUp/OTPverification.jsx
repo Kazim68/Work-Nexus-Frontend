@@ -57,11 +57,11 @@ export default function OTPVerification() {
       setLoading(true);
       const response = await create("/otp/verifyotp", { email, otp: otpString });
       if (response.status === 200) {
-        toast.success(response.data.message);
+        toast.success('Account created sucessfully. Please signin to continue');
         setLoading(false);
         localStorage.removeItem("email");
 
-        navigate("/pricing-plan");
+        navigate("/signin");
       } else {
         setLoading(false);
         toast.error(response.data);

@@ -33,10 +33,17 @@ const SignIn = () => {
                 dispatch(signInSuccess(response.data));
                 toast.success("Login successful!");
 
-                if(!response.data.employee.companyID && response.data.employee.userRole == 'admin')
-                {
+
+                if (response.data.pricingPlan == null && response.data.employee.userRole == 'admin') {
+                    navigate("/pricing-plan")
+
+                } else if (!response.data.employee.companyID && response.data.employee.userRole == 'admin') {
                     navigate("/orgInfo")
-                }else{
+
+                } else if (response.data.companyEmployeeCount <=1 && response.data.employee.userRole == 'admin') {
+                    navigate("/employee-onboarding")
+                }
+                else {
                     navigate("/attendance-dashboard")
                 }
             } else {
@@ -127,9 +134,9 @@ const SignIn = () => {
                                 <ButtonLoader />
                             ) : (
                                 <>
-                                <span>Sign In</span>
+                                    <span>Sign In</span>
                                     <FaSignInAlt className="w-5 h-5 ml-1" />
-                                    
+
                                 </>
                             )}
                         </button>

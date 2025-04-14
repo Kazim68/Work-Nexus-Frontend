@@ -83,6 +83,33 @@ export const createWithAuth = async (url, data, config = {}) => {
   }
 };
 
+export const createBlobWithAuth = async (url, data, config = {}) => {
+  try {
+    const response = await apiClient.post(url, data, {
+      responseType: 'blob', // important for binary data like Excel/PDF
+      ...config,
+    });
+    return response;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      // Try to read error from blob
+      const text = await error.response.data.text();
+      try {
+        const parsed = JSON.parse(text);
+        const errorMessage = parsed.message || "An error occurred";
+        throw new Error(errorMessage);
+      } catch {
+        throw new Error("An error occurred while processing the file.");
+      }
+    } else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    } else {
+      throw new Error(error.message || "Something went wrong.");
+    }
+  }
+};
+
+
 
 export const upload = async (url, data, config = {}) => {
   try {

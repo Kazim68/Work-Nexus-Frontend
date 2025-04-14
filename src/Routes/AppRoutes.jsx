@@ -24,6 +24,8 @@ import LandingRoutes from "../Components/LandingPages/LandingRoutes.jsx";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
+import EmployeeOnBoard from '../Components/Employee/EmployeeOnBoard.jsx';
+import PricingPlans from '../Components/Payment/PricingPlan2.jsx';
 
 
 const AppRoutes = () => {
@@ -63,6 +65,10 @@ const AppRoutes = () => {
                         <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
                         <Route path="/company-policies" element={<CompanyPolices />} />
                         <Route path="/profile-setting" element={<ProfileDashboard />} />
+
+
+                        <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
+
 
 
 

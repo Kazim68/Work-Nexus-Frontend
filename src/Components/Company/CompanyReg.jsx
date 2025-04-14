@@ -136,7 +136,7 @@ const MultiStepForm = () => {
                 employeeCount: formData.employeeCount,
                 workTimings: [`${formData.workStartTime} - ${formData.workEndTime}`],
                 companyStatus: true,
-                pricingPlan: data.pricingPlan && data.pricingPlan.planType ? data.pricingPlan.planType : 'starter',
+                pricingPlan: data.pricingPlan && data.pricingPlan.planType ? data.pricingPlan.planType : 'basic',
 
                 documents: uploadResponse.documents || [],
                 companyLogo: uploadResponse.logo || null,
@@ -153,9 +153,7 @@ const MultiStepForm = () => {
             
 
             toast.success("Company registered successfully!");
-            setStep(1);
             setLoading(false)
-
             setFormData({
                 companyName: "",
                 companyType: "",
@@ -168,6 +166,8 @@ const MultiStepForm = () => {
                 workEndTime: "",
                 logo: null,
             });
+            navigate('/employee-onboarding')
+            
         } catch (error) {
             setLoading(false)
 
