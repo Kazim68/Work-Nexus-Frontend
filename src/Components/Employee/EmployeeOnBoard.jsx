@@ -23,10 +23,82 @@ const EmployeeOnBoard = () => {
   const companyId = data?.employee?.companyID;
   const token = data?.token;
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setBlobUrl(null);
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const data = new Uint8Array(event.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+
+      // Required headers
+      const requiredFields = [
+        "First_Name",
+        "Last_Name",
+        "DateOfBirth",
+        "Gender",
+        "Address",
+        "Phone_Number",
+        "Email",
+        "HireDate",
+        "Role",
+        "Employee_Code",
+        "Department",
+      ];
+
+      const errors = [];
+      const emailSet = new Set();
+      const emp = new Set();
+
+
+      jsonData.forEach((row, index) => {
+        const rowNumber = index + 2; // +2 for Excel row (1-based, plus header)
+
+        // Check for missing fields
+        requiredFields.forEach((field) => {
+          if (!row[field] || row[field].toString().trim() === "") {
+            errors.push(`Row ${rowNumber}: ${field} is empty`);
+          }
+        });
+
+        // Check for valid role
+        if (row["Role"] && !["hr", "employee"].includes(row["Role"])) {
+          errors.push(`Row ${rowNumber}: Invalid Role "${row["Role"]}" (should be 'hr' or 'employee')`);
+        }
+
+        // Check for duplicate emails
+        const email = row["Email"]?.toLowerCase();
+        if (emailSet.has(email)) {
+          errors.push(`Row ${rowNumber}: Duplicate Email "${row["Email"]}"`);
+        } else {
+          emailSet.add(email);
+        }
+
+        const empCode = row["Employee_Code"];
+        console.log(empCode)
+        if (emp.has(empCode)) {
+          errors.push(`Row ${rowNumber}: Duplicate Employee code "${row["Employee_Code"]}"`);
+        } else {
+          emp.add(empCode);
+        }
+      });
+
+      if (errors.length > 0) {
+        errors.forEach((err) => toast.error(err));
+        setFile(null);
+      } else {
+        setFile(file);
+        toast.success("File is valid and ready for upload.");
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
   };
+
 
   const handleUpload = async () => {
     if (!file) return toast.error("Please select a file");
