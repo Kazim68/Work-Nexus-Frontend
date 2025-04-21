@@ -1,4 +1,3 @@
-// /src/api/api.js
 import axios from "axios";
 
 // Create an axios instance with a base URL (replace with your actual API URL)
@@ -7,22 +6,42 @@ const apiClient = axios.create({
 });
 
 // Fetch all data from a given URL
-export const fetchAll = async (url) => {
+export const fetchAll = async (url , config={}) => {
   try {
-    const response = await apiClient.get(url);
+    const response = await apiClient.get(url , config);
     return response.data; // Return the fetched data
   } catch (error) {
-    throw new Error(`Failed to fetch data from ${url}: ${error.message}`);
+    if (error.response) {
+      const errorMessage = error.response.data.message || "An error occurred";
+      throw new Error(errorMessage);
+    }
+    else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    }
+
+    else {
+      throw new Error(error.message || "Something went wrong.");
+    }
   }
 };
 
 // Fetch a single item by ID from a given URL
-export const fetchOne = async (url, id) => {
+export const fetchOne = async (url, id , config={}) => {
   try {
-    const response = await apiClient.get(`${url}/${id}`);
+    const response = await apiClient.get(`${url}/${id}`, config);
     return response.data; // Return data for the single item
   } catch (error) {
-    throw new Error(`Failed to fetch item with ID ${id} from ${url}: ${error.message}`);
+    if (error.response) {
+      const errorMessage = error.response.data.message || "An error occurred";
+      throw new Error(errorMessage);
+    }
+    else if (error.request) {
+      throw new Error("Network Error: Unable to reach the server.");
+    }
+
+    else {
+      throw new Error(error.message || "Something went wrong.");
+    }
   }
 };
 
@@ -73,6 +92,7 @@ export const createWithAuth = async (url, data, config = {}) => {
     return response;
   } catch (error) {
     if (error.response) {
+      console.log(error.response)
       const errorMessage = error.response.data.message || "An error occurred";
       throw new Error(errorMessage);
     } else if (error.request) {
@@ -126,9 +146,9 @@ export const upload = async (url, data, config = {}) => {
 
 
 // Update an existing item by ID (PUT request) at a given URL
-export const update = async (url, id, data) => {
+export const update = async (url, id, data , config={}) => {
   try {
-    const response = await apiClient.put(`${url}/${id}`, data);
+    const response = await apiClient.put(`${url}/${id}`, data , config);
     return response.data; // Return updated item data
   } catch (error) {
     if (error.response) {

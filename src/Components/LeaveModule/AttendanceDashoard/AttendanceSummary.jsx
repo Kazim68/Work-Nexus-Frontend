@@ -1,83 +1,43 @@
-import React, { useState } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import React, { useState, useEffect } from "react";
+import { AllCommunityModule, ModuleRegistry, themeQuartz } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+ModuleRegistry.registerModules([AllCommunityModule]);
 
-const AttendanceSummary = () => {
-  const [search, setSearch] = useState("");
+const AttendanceSummary = ({ cuurentMonthRows ,previousMonthRows}) => {
+  const [rowData, setRowData] = useState([...cuurentMonthRows , ...previousMonthRows]);
 
-  // Sample Attendance Data
-  const rows = [
-    { id: 1, Date: "24/11/2023", Day: "Monday", Name: "John Doe", ClockIn: "9:00 AM", ClockOut: "6:00 PM", WorkingHour: "9h", OverTime: "1h" },
-    { id: 2, Date: "20/11/2024", Day: "Wednesday", Name: "Jane Smith", ClockIn: "9:30 AM", ClockOut: "6:30 PM", WorkingHour: "9h", OverTime: "0h" },
-  ];
 
-  // Columns
-  const columns = [
-    { field: "Date", headerName: "Date", width: 120 },
-    { field: "Day", headerName: "Day", width: 120 },
-    { field: "Name", headerName: "Name", width: 120 },
-    { field: "ClockIn", headerName: "Clock In", width: 120 },
-    { field: "ClockOut", headerName: "Clock Out", width: 120 },
-    { field: "WorkingHour", headerName: "Working Hours", width: 150 },
-    { field: "OverTime", headerName: "Over Time", width: 120 },
-  ];
+  const [colDefs, setColDefs] = useState([
+    { field: "Date", sortable: true, filter: true, flex: 1 },
+    { field: "Day", sortable: true, filter: true },
+    { field: "ClockIn", sortable: true, filter: true },
+    { field: "ClockOut", sortable: true, filter: true },
+    { field: "WorkingHour", sortable: true, filter: true },
+    { field: "OverTime", sortable: true, filter: true, flex: 1 },
+  ]);
+
+  const myTheme = themeQuartz.withParams({
+    backgroundColor: '#212020',
+    foregroundColor: '#ffff',
+    headerTextColor: '#f77f00',
+    headerBackgroundColor: '#212020',
+    oddRowBackgroundColor: 'rgb(0, 0, 0, 0.03)',
+    headerColumnResizeHandleColor: '#f77f00',
+  });
 
   return (
     <div className="p-6 shadow-lg rounded-lg w-full min-h-[400px]">
-      {/* Header: Title + Search Bar */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-amber-600">Attendance Summary</h2>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border text-white border-amber-600 rounded-md px-3 py-2 w-1/3 focus:outline-none"
+      <h2 className="text-xl font-semibold text-amber-600 mb-4">Attendance Summary</h2>
+      <div style={{ height: 500 }}>
+        <AgGridReact
+          theme={myTheme}
+          pagination={true}
+          paginationPageSize={100}
+          paginationPageSizeSelector={[10, 50, 100]}
+          rowData={rowData}
+          columnDefs={colDefs}
         />
       </div>
-
-      {/* Attendance Table */}
-      <div className="h-64">
-  <DataGrid
-    rows={rows}
-    columns={columns}
-    pageSize={5}
-    rowsPerPageOptions={[5]}
-    disableSelectionOnClick
-    components={{ Toolbar: GridToolbar }}
-    sx={{
-      border: '1px solid #d97706',
-
-      // Fix: Header row background
-      '& .MuiDataGrid-columnHeaders': {
-        backgroundColor: '#212020 !important', // gray-800
-      },
-
-      // Fix: Header text color and weight
-      '& .MuiDataGrid-columnHeaderTitle': {
-        color: '#d97706 !important', // amber-600
-        fontWeight: 'bold !important',
-      },
-
-      // Fix: Override cell styles
-      '& .MuiDataGrid-cell': {
-        color: '#fcd34d',
-        borderBottom: '1px solid #374151',
-      },
-
-      '& .MuiDataGrid-footerContainer': {
-        color: '#d97706 !important',
-        borderTop: '1px solid #d97706',
-      },
-
-      '& .MuiSvgIcon-root, & .MuiCheckbox-root svg': {
-        color: '#f59e0b',
-        fill: '#f59e0b',
-      },
-    }}
-  />
-</div>
-
-
     </div>
   );
 };

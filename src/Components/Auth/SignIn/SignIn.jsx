@@ -29,11 +29,12 @@ const SignIn = () => {
             dispatch(signInStart());
             const response = await create("/auth/signin", { email, password });
 
+
             if (response.status === 200) {
                 dispatch(signInSuccess(response.data));
                 toast.success("Login successful!");
 
-
+                console.log(response.data.employee.userRole)
                 if (response.data.pricingPlan == null && response.data.employee.userRole == 'admin') {
                     navigate("/pricing-plan")
 
