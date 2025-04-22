@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { FaEdit } from "react-icons/fa"; // Importing the edit icon
-import ChangePassword from "./ChangePassword"; // Importing Change Password modal
+import { FaEdit } from "react-icons/fa";
+import ChangePassword from "./ChangePassword";
+import { useSelector } from "react-redux";
 
-const contactInfo = {
-    username: "Malick Barr",
-    password: "************",
-    email: "malickbarr123@gmail.com",
-    phoneNumber: "+92 333 6797123",
-};
+
 
 const ContactInfoModal = ({ isOpen, onClose }) => {
     const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
-
+    const { data } = useSelector((state) => state.user);
+    const employee = data?.employee;
+    const contactInfo = {
+        username: employee?.name || "N/A",
+        password: "************",
+        email: employee?.email || "N/A",
+        phoneNumber:employee?.phoneNumber || "N/A",
+    };
     if (!isOpen) return null;
 
     return (

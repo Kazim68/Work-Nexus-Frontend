@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { changePassword } from "../../Api/Employee/Employee"; // adjust path if needed
+import { getUserInfo } from "../../utils/getUserInfo";
 
 const ChangePassword = ({ onClose }) => {
     const [currentPassword, setCurrentPassword] = useState("");
@@ -11,6 +13,9 @@ const ChangePassword = ({ onClose }) => {
         repeat: false,
     });
 
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
+
     const togglePasswordVisibility = (field) => {
         setShowPasswords((prev) => ({
             ...prev,
@@ -18,9 +23,49 @@ const ChangePassword = ({ onClose }) => {
         }));
     };
 
+    const validatePassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W])(?=\S+$)(?!.*[|]).{8,}$/;
+        return regex.test(password);
+    };
+
+    const handleReset = async () => {
+        setError("");
+        setMessage("");
+
+        if (!currentPassword || !newPassword || !repeatPassword) {
+            setError("All fields are required.");
+            return;
+        }
+
+        if (newPassword !== repeatPassword) {
+            setError("New and repeat passwords do not match.");
+            return;
+        }
+
+        if (!validatePassword(newPassword)) {
+            setError("Password does not meet the criteria.");
+            return;
+        }
+
+        try {
+            const user = getUserInfo();
+            const employeeId = user?.employee?._id;
+
+            if (!employeeId) {
+                setError("Employee ID not found.");
+                return;
+            }
+
+            const res = await changePassword(newPassword);
+            setMessage("Password updated successfully!");
+        } catch (err) {
+            setError(err.response?.data?.message || "Failed to reset password.");
+        }
+    };
+
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-md shadow-lg w-[500px] h-auto border border-gray-300">
+            <div className="bg-white p-6 rounded-md shadow-lg w-[500px] border border-gray-300">
                 <h2 className="text-2xl font-bold mb-4 text-gray-900 text-center">Change Password</h2>
 
                 <div className="space-y-3">
@@ -59,9 +104,20 @@ const ChangePassword = ({ onClose }) => {
                     ))}
                 </div>
 
+                {message && <p className="text-green-600 mt-3 text-sm">{message}</p>}
+                {error && <p className="text-red-600 mt-3 text-sm">{error}</p>}
+
                 <div className="flex justify-between mt-6">
-                    <button className="px-4 py-2 bg-blue-400 text-white rounded-md">Save</button>
-                    <button className="px-4 py-2 border border-gray-400 rounded-md" onClick={onClose}>
+                    <button
+                        className="px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-blue-500"
+                        onClick={handleReset}
+                    >
+                        Save
+                    </button>
+                    <button
+                        className="px-4 py-2 border border-gray-400 rounded-md"
+                        onClick={onClose}
+                    >
                         Back
                     </button>
                 </div>

@@ -19,7 +19,7 @@ const Home = () => {
 
   // Prevent scrolling globally
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto"; // restore scroll on unmount
     };
@@ -76,9 +76,9 @@ const Home = () => {
 
       {/* Bottom Text */}
       <div className="absolute bottom-20 right-12 z-10 text-white font-bold text-2xl sm:text-4xl text-right animate-pulse">
-        <p>SEAMLESS.</p>
-        <p>FAST.</p>
-        <p>RELIABLE.</p>
+        <p>SEAMLESS</p>
+        <p>FAST</p>
+        <p>RELIABLE</p>
       </div>
 
       {/* Inline Tailwind Animations */}

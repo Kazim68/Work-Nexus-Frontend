@@ -22,7 +22,7 @@ const modules = [
 
 const ModuleCard = ({ title, icon, number }) => {
   return (
-    <div className="bg-[#1a1a1a] rounded-xl w-60 h-60 p-4 flex flex-col justify-between items-center shadow-md hover:shadow-orange-500/30 transition duration-300">
+    <div className="bg-[#1a1a1a] rounded-xl w-52 h-56 p-4 flex flex-col justify-between items-center shadow-md hover:shadow-orange-500/30 transition duration-300">
       <img src={icon} alt={title} className="h-10 mt-2" />
       <h2 className="text-white font-medium text-center text-sm">{title}</h2>
       <span className="text-gray-400 text-base font-medium">{number.toString().padStart(2, "0")}</span>
