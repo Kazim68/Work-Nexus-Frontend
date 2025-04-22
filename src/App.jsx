@@ -1,8 +1,6 @@
 import './App.css'
 import AppRoutes from './Routes/AppRoutes'
 
-import Navbar from "./Components/LandingPages/Navbar";
-
 
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // import styles

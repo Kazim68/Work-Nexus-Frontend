@@ -1,5 +1,3 @@
-// src/Routes/LandingRoutes.jsx
-
 import React from "react";
 import Home from "./Home/Home";
 import Modules from "./Modules/Modules";
@@ -9,24 +7,24 @@ import Contact from "./Contact/ContactUs";
 
 const LandingRoutes = () => {
   return (
-    <div>
-      <section id="home">
+    <div className="w-full">
+      <section id="home" className="min-h-screen">
         <Home />
       </section>
 
-      <section id="modules">
+      <section id="modules" className="min-h-screen">
         <Modules />
       </section>
 
-      <section id="services">
+      <section id="services" className="min-h-screen">
         <Services />
       </section>
 
-      <section id="aim">
+      <section id="aim" className="min-h-screen">
         <Aim />
       </section>
 
-      <section id="contact">
+      <section id="contact" className="min-h-screen">
         <Contact />
       </section>
     </div>
