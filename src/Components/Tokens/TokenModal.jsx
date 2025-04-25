@@ -22,9 +22,6 @@ const tokenOptions = [
 
 const commonAttendanceIssues = [
     "Clock-out missing",
-    "Late arrival",
-    "Early departure",
-    "Incorrect hours recorded"
 ];
 
 const TokenModal = ({ isOpen, onClose }) => {

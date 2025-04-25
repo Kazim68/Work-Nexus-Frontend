@@ -3,10 +3,12 @@ import Layout from '../Layout/Layout'
 import TokenResolve from './TokenResolve'
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
-import { fetchAll } from '../../Api/Api';
+import { fetchAll, fetchOne } from '../../Api/Api';
 
 const HRDashboard = () => {
     const { data } = useSelector((state) => state.user);
+    const companyId = data.employee.companyID._id;
+
 
     // Fetching data using React Query
     const { data: tokens, isLoading:tokensLoading, error:tokensError} = useQuery({
