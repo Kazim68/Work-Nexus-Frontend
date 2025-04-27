@@ -64,7 +64,7 @@ const LeaveForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div>
-          <label className="block text-sm font-medium text-white">Employee Id - {userInfo?.employee?._id}</label>
+          <label className="block text-sm font-medium text-white">Employee Id - {userInfo?.employee?.employeeCode || "N/A"}</label>
         </div>
         <div>
           <label className="block text-sm font-medium text-white">Name - {userInfo?.employee?.firstName} {userInfo?.employee?.lastName}</label>
