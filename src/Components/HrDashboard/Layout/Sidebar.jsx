@@ -32,8 +32,7 @@ const menuItems = [
     name: "Leave",
     icon: <IoMdPerson />,
     dropdown: [
-      { name: "Apply Leave", link: "/hr-apply-leave" },
-      { name: "Leave Status", link: "/hr-leave-status" }
+      { name: "Approve Leave", link: "/hr-approve-leave" }
     ]
   },
   { name: "TimeSheet", icon: <FaRegClock />, link: "/hr-timesheet" },
