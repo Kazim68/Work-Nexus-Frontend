@@ -5,15 +5,18 @@ import LeaveStats from "../LeaveDashboard/LeaveStats";
 import LeaveRequests from "./LeaveRequest";
 import { useEffect, useState } from "react";
 import { getLeaveSummary } from '../../../Api/Employee/Leaves.js';
+import { useSelector } from "react-redux";
 
 const LeaveStatus = () => {
 
   const [leaveSummary, setLeaveSummary] = useState(null);
+  const { data } = useSelector((state) => state.user);
+  const employeeId = data?.employee?._id;
 
   useEffect(() => { 
     const fetchLeaveSummary = async () => {
       try {
-        const response = await getLeaveSummary();
+        const response = await getLeaveSummary(employeeId);
         console.log(response);
         if (response?.success) {
           setLeaveSummary(response.leaveSummary);

@@ -21,13 +21,15 @@ import NewMail from '../Components/Auth/SignUp/UpdateEmail';
 import Loader from '../Components/Shared/Loader';
 import CompanyReg from '../Components/Company/CompanyReg.jsx'
 import LandingRoutes from "../Components/LandingPages/LandingRoutes.jsx";
-import HrDashboard from '../Components/HrDashboard/HrDashboard.jsx';
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
 import EmployeeOnBoard from '../Components/Employee/EmployeeOnBoard.jsx';
-import HRDashboard from '../Components/HR/HRDashboard.jsx';
+import HrDashboard from '../Components/HrDashboard/HrDashboard.jsx';
+import PaySlip from '../Components/HrDashboard/PayslipPopup.jsx';
+import LeaveApproval from '../Components/HrDashboard/LeaveModule/LeaveApproval.jsx';
 import { NotificationProvider } from '../contexts/NotificationContext.jsx';
+
 
 
 const AppRoutes = () => {
@@ -55,7 +57,7 @@ const AppRoutes = () => {
                             <Route path="/profile-setting" element={<ProfileDashboard />} />
                             <Route path="/profile-dashboard" element={<ProfileDashboard />} />
 
-                            <Route path="/" element={<HrDashboard />} />
+                            {/* <Route path="/" element={<HrDashboard />} /> */}
 
                             {/* <Route path="/" element={<LandingRoutes />} /> */}
 
@@ -72,9 +74,10 @@ const AppRoutes = () => {
 
                             <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
 
-                            <Route path="/hr-dashboard" element={<HRDashboard />} />
+                        <Route path="/hr-dashboard" element={<HrDashboard />} />
 
-
+                        <Route path="/payslip" element={<PaySlip />} />
+                        <Route path="/hr-approve-leave" element={<LeaveApproval />} />
 
 
 

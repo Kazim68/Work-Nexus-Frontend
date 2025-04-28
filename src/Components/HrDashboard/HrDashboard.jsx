@@ -7,10 +7,10 @@ import TotalEmployees from "./TotalEmployee";
 import ClockCards from "./ClockInOut";
 import AttendenceChart from "./AttendenceChart";
 import TicketRequests from "./TicketRequest";
-import LeaveRequests from "./LeaveRequest";
 import PayslipList from "./MonthlyPayslip";
 import LeaveInfoCards from "./LeaveInfoCards";
 import EmployeeAttendance from "./AttendenceLineChart";
+import HRLeaveRequest from "./LeaveModule/HRLeaveRequest";
 
 const HrDashboard = () => {
   return (
@@ -43,7 +43,7 @@ const HrDashboard = () => {
 
           <div className="w-[70%] pl-6 flex flex-col gap-4">
             <AttendenceChart />
-            <LeaveRequests />
+            <HRLeaveRequest />
             <div className="flex gap-4">
               {/* Left = Leave Info Cards (20%) */}
               <div className="w-[13%]">
