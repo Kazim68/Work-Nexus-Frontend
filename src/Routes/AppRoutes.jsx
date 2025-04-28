@@ -28,8 +28,8 @@ import EmployeeOnBoard from '../Components/Employee/EmployeeOnBoard.jsx';
 import HrDashboard from '../Components/HrDashboard/HrDashboard.jsx';
 import PaySlip from '../Components/HrDashboard/PayslipPopup.jsx';
 import LeaveApproval from '../Components/HrDashboard/LeaveModule/LeaveApproval.jsx';
+import TokenDashboard from '../Components/Tokens/TokenDashboard.jsx';
 import { NotificationProvider } from '../contexts/NotificationContext.jsx';
-
 
 
 const AppRoutes = () => {
@@ -78,6 +78,9 @@ const AppRoutes = () => {
 
                         <Route path="/payslip" element={<PaySlip />} />
                         <Route path="/hr-approve-leave" element={<LeaveApproval />} />
+
+                        <Route path="/hr/tickets" element={<TokenDashboard />} />
+
 
 
 

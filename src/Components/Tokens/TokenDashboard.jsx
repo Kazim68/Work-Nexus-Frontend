@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAll, fetchOne } from '../../Api/Api';
 
-const HRDashboard = () => {
+const TokenDashboard = () => {
     const { data } = useSelector((state) => state.user);
     const companyId = data.employee.companyID._id;
 
@@ -14,7 +14,7 @@ const HRDashboard = () => {
     const { data: tokens, isLoading:tokensLoading, error:tokensError} = useQuery({
         queryKey: ["get_all_tokens"],
         queryFn: () =>
-            fetchAll("/token/getAllTokens", {
+            fetchOne("/token/getAllTokens", companyId,{
                 headers: {
                     Authorization: `Bearer ${data.token}`,
                 },
@@ -22,6 +22,10 @@ const HRDashboard = () => {
         staleTime: 0,
         cacheTime: 0,
     });
+
+    
+
+    
 
 
     return (
@@ -31,4 +35,4 @@ const HRDashboard = () => {
     )
 }
 
-export default HRDashboard
+export default TokenDashboard

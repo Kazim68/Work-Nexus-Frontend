@@ -1,4 +1,6 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
     LineChart,
     Line,
@@ -9,117 +11,132 @@ import {
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts";
+import { fetchOne } from "../../Api/Api";
 
-const data = [
-    {
-        week: "First Week",
-        scheduled: 21,
-        worked: 13.85,
-        average: 4.62,
-        scheduledLabel: "21:00:00",
-        workedLabel: "13:51:29",
-        averageLabel: "04:37:10",
-    },
-    {
-        week: "Second Week",
-        scheduled: 27,
-        worked: 17.8,
-        average: 5.94,
-        scheduledLabel: "27:00:00",
-        workedLabel: "17:48:07",
-        averageLabel: "05:56:02",
-    },
-    {
-        week: "Third Week",
-        scheduled: 45,
-        worked: 0,
-        average: 0,
-        scheduledLabel: "45:00:00",
-        workedLabel: "00:00:00",
-        averageLabel: "00:00:00",
-    },
-    {
-        week: "Fourth Week",
-        scheduled: 45,
-        worked: 0,
-        average: 0,
-        scheduledLabel: "45:00:00",
-        workedLabel: "00:00:00",
-        averageLabel: "00:00:00",
-    },
-    {
-        week: "Fifth Week",
-        scheduled: 45,
-        worked: 0,
-        average: 0,
-        scheduledLabel: "45:00:00",
-        workedLabel: "00:00:00",
-        averageLabel: "00:00:00",
-    },
-];
+const weekNames = {
+    1: "First Week",
+    2: "Second Week",
+    3: "Third Week",
+    4: "Fourth Week",
+    5: "Fifth Week",
+};
 
-const EmployeeAttendance = () => {
+const EmployeeAttendance = ({ employees }) => {
+    const { data } = useSelector((state) => state.user);
+    const [selectedEmployee, setSelectedEmployee] = useState(data.employee._id || "");
+    const workingHoursString = data.employee.companyID.workTimings?.[0];
+
+    const calculateDailyWorkingHours = (timeRange) => {
+        if (!timeRange) return 0;
+        const [start, end] = timeRange.split(" - ");
+        const [startHour, startMin] = start.split(":").map(Number);
+        const [endHour, endMin] = end.split(":").map(Number);
+
+        const startTime = startHour + startMin / 60;
+        const endTime = endHour + endMin / 60;
+
+        return (endTime - startTime).toFixed(2);
+    };
+
+    const dailyWorkingHours = parseFloat(calculateDailyWorkingHours(workingHoursString));
+    const weeklyHours = dailyWorkingHours * 5;
+
+    const { data: weeklyAttendance } = useQuery({
+        queryKey: ["get_weekly", selectedEmployee],
+        queryFn: () =>
+            fetchOne("/attendance/weekly", selectedEmployee, {
+                headers: {
+                    Authorization: `Bearer ${data.token}`,
+                },
+            }),
+        enabled: !!selectedEmployee,
+        staleTime: 0,
+        cacheTime: 0,
+    });
+
+    const graphData = weeklyAttendance?.data?.map((item, idx) => ({
+        week: weekNames[idx + 1] || `Week ${idx + 1}`,
+        scheduled: weeklyHours,
+        worked: timeToDecimalHours(item.workedHours),
+        average: timeToDecimalHours(item.averageHours),
+        scheduledLabel: weeklyHours,
+        workedLabel: item.workedHours,
+        averageLabel: item.averageHours,
+    })) || [];
+
+    function timeToDecimalHours(time) {
+        if (!time) return 0;
+        const [h, m, s] = time.split(":").map(Number);
+        return h + m / 60 + s / 3600;
+    }
+
     return (
-        <div className="p-3 bg-white rounded-lg shadow-md max-w-2xl text-xs">
-            <div className="flex justify-between items-center mb-2">
-                <h2 className="text-sm font-semibold text-blue-900 flex items-center gap-2">
+        <div className="p-4  border border-amber-600 rounded-2xl shadow-lg text-xs text-white">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-sm font-semibold flex items-center gap-2">
                     📈 EMPLOYEE ATTENDANCE VISUALIZATION
                 </h2>
                 <div className="flex items-center gap-2">
-                    <span className="font-medium">Search:</span>
-                    <input
-                        type="text"
-                        value="EMP-101"
-                        readOnly
-                        className="bg-orange-400 text-white font-bold px-2 py-1 rounded text-xs"
-                    />
+                    <span className="font-medium text-gray-300">Employee:</span>
+                    <select
+                        value={selectedEmployee}
+                        onChange={(e) => setSelectedEmployee(e.target.value)}
+                        className="p-1 rounded border border-[#F99932] bg-[#212020] text-orange-500 text-[12px]"
+                    >
+                        {employees.map((emp) => (
+                            <option key={emp._id} value={emp._id}>
+                                {emp.firstName} {emp.lastName} ({emp.employeeCode})
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
-            <ResponsiveContainer width="100%" height={180}>
-                <LineChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="week" tick={{ fontSize: 9 }} />
+            <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={graphData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                    <XAxis dataKey="week" tick={{ fontSize: 10, fill: "#ccc" }} />
                     <YAxis
                         label={{
                             value: "Hours",
                             angle: -90,
                             position: "insideLeft",
                             offset: 5,
-                            fontSize: 9,
+                            fontSize: 10,
+                            fill: "#ccc"
                         }}
                         domain={[0, 50]}
-                        tick={{ fontSize: 9 }}
+                        tick={{ fontSize: 10, fill: "#ccc" }}
                     />
-                    <Tooltip />
-                    <Legend wrapperStyle={{ fontSize: 9 }} />
-                    <Line type="monotone" dataKey="scheduled" stroke="red" name="Total Schedule Hours" />
-                    <Line type="monotone" dataKey="worked" stroke="blue" name="Total Work Hours" />
-                    <Line type="monotone" dataKey="average" stroke="orange" name="Average Hours" />
+                    <Tooltip contentStyle={{ backgroundColor: "#333", borderColor: "#555" }} />
+                    <Legend wrapperStyle={{ fontSize: 10 }} />
+                    <Line type="monotone" dataKey="scheduled" stroke="#ef4444" name="Scheduled Hours" />
+                    <Line type="monotone" dataKey="worked" stroke="#3b82f6" name="Worked Hours" />
+                    <Line type="monotone" dataKey="average" stroke="#f59e0b" name="Average Hours" />
                 </LineChart>
             </ResponsiveContainer>
 
-            <div className="overflow-x-auto mt-4">
-                <table className="min-w-full border border-gray-300 text-xs text-left">
-                    <thead className="bg-gray-200">
+            <div className="overflow-x-auto mt-6">
+                <table className="min-w-full border border-gray-700 text-xs text-left">
+                    <thead className="bg-gray-800">
                         <tr>
-                            <th className="border px-2 py-1">Week</th>
-                            <th className="border px-2 py-1">Description</th>
-                            <th className="border px-2 py-1">Scheduled Hours</th>
-                            <th className="border px-2 py-1">Worked Hours</th>
-                            <th className="border px-2 py-1">Average Hours</th>
+                            <th className="border border-gray-700 px-3 py-2">Week</th>
+                            <th className="border border-gray-700 px-3 py-2">Description</th>
+                            <th className="border border-gray-700 px-3 py-2">Scheduled Hours</th>
+                            <th className="border border-gray-700 px-3 py-2">Worked Hours</th>
+                            <th className="border border-gray-700 px-3 py-2">Average Hours</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((row, idx) => (
-                            <tr key={idx} className="hover:bg-gray-100">
-                                <td className="border px-2 py-1 text-blue-700 font-semibold">
+                        {graphData.map((row, idx) => (
+                            <tr key={idx} className="hover:bg-gray-800">
+                                <td className="border border-gray-700 px-3 py-2 text-blue-400 font-semibold">
                                     {row.week}
                                 </td>
-                                <td className="border px-2 py-1">Working Hours</td>
-                                <td className="border px-2 py-1">{row.scheduledLabel}</td>
-                                <td className="border px-2 py-1">{row.workedLabel}</td>
-                                <td className="border px-2 py-1">{row.averageLabel}</td>
+                                <td className="border border-gray-700 px-3 py-2">Working Hours</td>
+                                <td className="border border-gray-700 px-3 py-2">{row.scheduledLabel}</td>
+                                <td className="border border-gray-700 px-3 py-2">{row.workedLabel}</td>
+                                <td className="border border-gray-700 px-3 py-2">{row.averageLabel}</td>
                             </tr>
                         ))}
                     </tbody>
