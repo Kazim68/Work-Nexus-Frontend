@@ -1,25 +1,56 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { FaCalendarAlt, FaUmbrellaBeach, FaSadTear } from "react-icons/fa"; // Example icons
+import { getLeaveSummary } from '../../Api/Employee/Leaves';
+import { useSelector } from "react-redux";
 
-const leaveData = [
+const leaveTemplate = [
     {
-        count: "10",
         label: "Leave Taken",
-        icon: <FaCalendarAlt size={30} className="text-red-400" />, // Adjusted icon size
+        icon: <FaCalendarAlt size={30} className="text-red-400" />,
     },
     {
-        count: "05",
         label: "Leave Balance",
-        icon: <FaUmbrellaBeach size={30} className="text-pink-400" />, // Adjusted icon size
+        icon: <FaUmbrellaBeach size={30} className="text-pink-400" />,
     },
     {
-        count: "05",
-        label: "Sick leave",
-        icon: <FaSadTear size={30} className="text-yellow-400" />, // Adjusted icon size
+        label: "Sick Leave",
+        icon: <FaSadTear size={30} className="text-yellow-400" />,
     },
 ];
 
+
 const LeaveInfoCards = () => {
+
+    const [leaveData, setLeaveData] = useState([]);
+    const { data } = useSelector((state) => state.user);
+    const employeeId = data?.employee?._id;
+
+    useEffect(() => {
+        const fetchLeaveSummary = async () => {
+            try {
+                const response = await getLeaveSummary(employeeId);
+                if (response.success) {
+                    const { LeavesTaken, AnnualLeaves, SickLeaves } = response.leaveSummary;
+    
+                    const newLeaveData = [
+                        { ...leaveTemplate[0], count: LeavesTaken },
+                        { ...leaveTemplate[1], count: AnnualLeaves - LeavesTaken },
+                        { ...leaveTemplate[2], count: SickLeaves },
+                    ];
+    
+                    setLeaveData(newLeaveData);
+                } else {
+                    console.error("Error fetching leave requests");
+                }
+            } catch (error) {
+                console.error("Error fetching leave requests:", error);
+            }
+        };
+    
+        fetchLeaveSummary();
+    }, []);
+    
+
     return (
         <div className="flex flex-col gap-3">
             {leaveData.map((item, index) => (

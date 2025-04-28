@@ -13,6 +13,7 @@ const Dashboard = () => {
     const { data } = useSelector((state) => state.user);
     const employeeId = data.employee._id;
     const workingHoursString = data.employee.companyID.workTimings?.[0]; // e.g., '09:00 - 17:00'
+    
 
     //Fetching attendance data
     const { data: attendanceData, error, isLoading } = useQuery({

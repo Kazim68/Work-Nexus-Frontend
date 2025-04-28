@@ -1,12 +1,9 @@
 import React from "react";
-import bgImg from "../../assets/Landing Page Icons/Background Pics/HA21-04.png";
-import TopBar from "./TopBar";
 import GenderPiChart from "./GenderPiChart";
 import TotalEmployees from "./TotalEmployee";
 import ClockCards from "./ClockInOut";
 import AttendenceChart from "./AttendenceChart";
 import TicketRequests from "./TicketRequest";
-import LeaveRequests from "./LeaveRequest";
 import PayslipList from "./MonthlyPayslip";
 import LeaveInfoCards from "./LeaveInfoCards";
 import EmployeeAttendance from "./AttendenceLineChart";
@@ -15,15 +12,15 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../Shared/Loader";
 import { fetchOne } from "../../Api/Api";
 import Layout from "../Layout/Layout";
+import HRLeaveRequest from "./LeaveModule/HRLeaveRequest";
 
 const HrDashboard = () => {
 
   const { data } = useSelector((state) => state.user);
   const employeeId = data.employee._id;
 
-  const companyId = data.employee.companyID._id
-
-  const workingHoursString = data.employee.companyID.workTimings?.[0]; // e.g., '09:00 - 17:00'
+  const companyId = data.employee.companyID?._id || 0;
+  const workingHoursString = data.employee.companyID?.workTimings?.[0] || 0; // e.g., '09:00 - 17:00'
 
 
   const getworkingtime= (timeRange) => {
@@ -93,7 +90,7 @@ const HrDashboard = () => {
 
 
 
-  const { totalEmployees, genderCounts } = getEmployeeCounts(employeeData.employees);
+  const { totalEmployees, genderCounts } = getEmployeeCounts(employeeData?.employees);
 
   const males = (genderCounts.male / totalEmployees) * 100
   const females = (genderCounts.female / totalEmployees) * 100
@@ -118,10 +115,10 @@ const HrDashboard = () => {
         <TicketRequests tickets={tokens.tokens} />
       </div>
 
-      {/* Right Panel - 70% */}
+          {/* Right Panel - 70% */}
       <div className="w-[80%] flex flex-col gap-4">
         <AttendenceChart employees={employeeData.employees} />
-        <LeaveRequests />
+        <HRLeaveRequest />
       </div>
     </div>
 
@@ -132,7 +129,6 @@ const HrDashboard = () => {
 
   </div>
 </Layout>
-
 
   );
   

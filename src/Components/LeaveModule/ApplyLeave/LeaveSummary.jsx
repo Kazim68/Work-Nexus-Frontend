@@ -1,15 +1,16 @@
 import React, { useEffect, useState  } from "react";
-import { getUserInfo } from '../../../utils/getUserInfo.js';
 import { getLeaveSummary } from '../../../Api/Employee/Leaves.js';
+import { useSelector } from "react-redux";
 
 const LeaveSummary = () => {
-  const userInfo = getUserInfo();
   const [leaveSummary, setLeaveSummary] = useState(null);
+  const { data } = useSelector((state) => state.user);
+  const employeeId = data?.employee?._id;
 
   useEffect(() => {
     const fetchLeaveSummary = async () => {
       try {
-        const response = await getLeaveSummary();
+        const response = await getLeaveSummary(employeeId);
         console.log(response);
         if (response?.success) {
           setLeaveSummary(response.leaveSummary);

@@ -25,67 +25,68 @@ import LandingRoutes from "../Components/LandingPages/LandingRoutes.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleClientID } from './Secret';
 import EmployeeOnBoard from '../Components/Employee/EmployeeOnBoard.jsx';
-import HRDashboard from '../Components/HrDashboard/HrDashboard.jsx';
+import HrDashboard from '../Components/HrDashboard/HrDashboard.jsx';
 import PaySlip from '../Components/HrDashboard/PayslipPopup.jsx';
 import LeaveApproval from '../Components/HrDashboard/LeaveModule/LeaveApproval.jsx';
 import TokenDashboard from '../Components/Tokens/TokenDashboard.jsx';
+import { NotificationProvider } from '../contexts/NotificationContext.jsx';
 
 
 const AppRoutes = () => {
     return (
         <>
-            <GoogleOAuthProvider clientId={GoogleClientID()}>
-                <BrowserRouter>
-                    <Routes>
+            <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+                <NotificationProvider>
+                    <BrowserRouter>
+                        <Routes>
 
-                        <Route path="/signup" element={<SignUp />} />
+                            <Route path="/signup" element={<SignUp />} />
 
-                        <Route path="/verify" element={<OTPVerification />} />
-                        <Route path="/update-email" element={<NewMail />} />
+                            <Route path="/verify" element={<OTPVerification />} />
+                            <Route path="/update-email" element={<NewMail />} />
 
-                        <Route path="/orgInfo" element={<CompanyReg />} />
-                        <Route path="/pricing-plan" element={<PricingPlan />} />
-                        <Route path="/payment" element={<PaymentSetup />} />
-
-
-
-                        <Route path="/dashboard" element={<LeaveDashboard />} />
-                        <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
-                        <Route path="/company-policies" element={<CompanyPolices />} />
-                        <Route path="/profile-setting" element={<ProfileDashboard />} />
-                        <Route path="/profile-dashboard" element={<ProfileDashboard />} />
-
-
-                        {/* <Route path="/" element={<LandingRoutes />} /> */}
-
-
-                        <Route path="/signin" element={<SignIn />} />
-                        <Route path="/forgot-password" element={<ForgotPassword />} />
-                        <Route path="/recover-password" element={<RecoveredPassword />} />
-
-
-                        <Route path="/apply-leave" element={<ApplyLeave />} />
-                        <Route path="/leave-status" element={<LeaveStatus />} />
+                            <Route path="/orgInfo" element={<CompanyReg />} />
+                            <Route path="/pricing-plan" element={<PricingPlan />} />
+                            <Route path="/payment" element={<PaymentSetup />} />
 
 
 
-                        <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
+                            <Route path="/dashboard" element={<LeaveDashboard />} />
+                            <Route path="/attendance-dashboard" element={<AttendanceDashboard />} />
+                            <Route path="/company-policies" element={<CompanyPolices />} />
+                            <Route path="/profile-setting" element={<ProfileDashboard />} />
+                            <Route path="/profile-dashboard" element={<ProfileDashboard />} />
 
-                        <Route path="/hr-dashboard" element={<HRDashboard />} />
+                            {/* <Route path="/" element={<HrDashboard />} /> */}
+
+                            {/* <Route path="/" element={<LandingRoutes />} /> */}
+
+
+                            <Route path="/signin" element={<SignIn />} />
+                            <Route path="/forgot-password" element={<ForgotPassword />} />
+                            <Route path="/recover-password" element={<RecoveredPassword />} />
+
+
+                            <Route path="/apply-leave" element={<ApplyLeave />} />
+                            <Route path="/leave-status" element={<LeaveStatus />} />
+
+
+
+                            <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
+
+                        <Route path="/hr-dashboard" element={<HrDashboard />} />
+
                         <Route path="/payslip" element={<PaySlip />} />
-                        <Route path="/" element={<LeaveApproval />} />
+                        <Route path="/hr-approve-leave" element={<LeaveApproval />} />
 
                         <Route path="/hr/tickets" element={<TokenDashboard />} />
 
 
 
 
-
-
-
-
-                    </Routes>
-                </BrowserRouter>
+                        </Routes>
+                    </BrowserRouter>
+                </NotificationProvider>
             </GoogleOAuthProvider>
 
         </>

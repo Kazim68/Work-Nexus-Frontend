@@ -1,49 +1,37 @@
-import React from "react";
-
-const leaveData = [
-  {
-    id: "101",
-    fromDate: "24/11/2023",
-    toDate: "02/12/2023",
-    days: 8,
-    type: "Sick Leave",
-    link: "#",
-  },
-  {
-    id: "102",
-    fromDate: "24/11/2023",
-    toDate: "02/12/2023",
-    days: 8,
-    type: "Sick Leave",
-    link: "#",
-  },
-  {
-    id: "103",
-    fromDate: "24/11/2023",
-    toDate: "02/12/2023",
-    days: 8,
-    type: "Sick Leave",
-    link: "#",
-  },
-  {
-    id: "104",
-    fromDate: "24/11/2023",
-    toDate: "02/12/2023",
-    days: 8,
-    type: "Sick Leave",
-    link: "#",
-  },
-  {
-    id: "105",
-    fromDate: "24/11/2023",
-    toDate: "02/12/2023",
-    days: 8,
-    type: "Sick Leave",
-    link: "#",
-  },
-];
+import React, { useState, useEffect } from "react";
+import { getLeaveReportOfMonth } from '../../Api/Employee/Leaves';
 
 const LeaveRequests = () => {
+  const [leaveData, setLeaveData] = useState([]);
+
+  useEffect(() => {
+    const fetchLeaveData = async () => {
+      try {
+        const response = await getLeaveReportOfMonth();
+        if (response.success) {
+          console.log("Leave data fetched successfully:", response.leaves);
+          const formattedData = response.leaves.map((leave, index) => ({
+            id: leave.employeeCode,
+            fromDate: leave.fromDate.split("T")[0],
+            toDate: leave.toDate.split("T")[0],
+            days: leave.noOfDays,
+            type: leave.leaveType.toUpperCase(),
+            status: leave.status.toUpperCase(),
+            reason: leave.reason
+          }));
+          setLeaveData(formattedData);
+        } else {
+          console.error("Error fetching leave data");
+        }
+      } catch (error) {
+        console.error("Error fetching leave data:", error);
+      }
+    };
+
+    fetchLeaveData();
+  }, []);
+
+
   return (
     <div className="border border-[#F99932] rounded-md bg-[#333334] text-white w-[800px] max-w-4xl p-0 overflow-x-auto">
       {/* Header */}

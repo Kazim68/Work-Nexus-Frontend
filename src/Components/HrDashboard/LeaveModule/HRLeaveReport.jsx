@@ -1,24 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { FaHistory } from "react-icons/fa";
+import { getLeaveReportOfMonth } from '../../../Api/Employee/Leaves';
 
 const HRLeaveHistory = () => {
   const [filter, setFilter] = useState("All");
   const [searchText, setSearchText] = useState("");
+  const [leaveData, setLeaveData] = useState([]);
 
-  const leaveData = [
-    { id: 1, fromDate: "24/11/2023", toDate: "02/12/2023", days: 8, type: "Sick Leave", reason: "..................", status: "Approved", employeeName: "John Doe" },
-    { id: 2, fromDate: "24/11/2023", toDate: "02/12/2023", days: 8, type: "Sick Leave", reason: "..................", status: "Rejected", employeeName: "Jane Smith" },
-    // Add more rows if needed
-  ];
+  useEffect(() => { 
+    const fetchLeaveData = async () => {
+      try {
+        const response = await getLeaveReportOfMonth();
+        if (response.success) {
+          console.log("Leave data fetched successfully:", response.leaves);
+          const formattedData = response.leaves.map((leave, index) => ({
+            id: index + 1,
+            employeeName: leave.employeeName.toUpperCase(),
+            fromDate: leave.fromDate.split("T")[0],
+            toDate: leave.toDate.split("T")[0],
+            days: leave.noOfDays,
+            type: leave.leaveType.toUpperCase(),
+            status: leave.status.toUpperCase(),
+          }));
+          setLeaveData(formattedData);
+        } else {
+          console.error("Error fetching leave data");
+        }
+      } catch (error) {
+        console.error("Error fetching leave data:", error);
+      }
+    };
+
+    fetchLeaveData();
+  }, []);
 
   const columns = [
     { field: "id", headerName: "Sr.No", width: 70 },
+    { field: "employeeName", headerName: "Employee Name", width: 150 },
     { field: "fromDate", headerName: "From Date", width: 120 },
     { field: "toDate", headerName: "To Date", width: 120 },
     { field: "days", headerName: "No. of Days", width: 120 },
     { field: "type", headerName: "Leave Type", width: 150 },
-    { field: "reason", headerName: "Reason for Leave", width: 200 },
     { 
       field: "status", 
       headerName: "Status", 
@@ -26,7 +49,7 @@ const HRLeaveHistory = () => {
       renderCell: (params) => (
         <span
           className={`px-2 py-1 rounded text-white text-xs font-semibold ${
-            params.value === "Approved" ? "bg-green-500" : "bg-red-500"
+            params.value === "APPROVED" ? "bg-green-500" : "bg-red-500"
           }`}
         >
           {params.value}
@@ -36,7 +59,7 @@ const HRLeaveHistory = () => {
   ];
 
   const filteredData = leaveData.filter((row) => {
-    if (filter !== "All" && row.status !== filter) return false;
+    if (filter !== "All" && row.status !== filter.toUpperCase()) return false;
     if (searchText && !row.employeeName.toLowerCase().includes(searchText.toLowerCase())) return false;
     return true;
   });
