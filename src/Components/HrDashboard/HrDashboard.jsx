@@ -1,6 +1,4 @@
 import React from "react";
-import bgImg from "../../assets/Landing Page Icons/Background Pics/HA21-04.png";
-import TopBar from "./TopBar";
 import GenderPiChart from "./GenderPiChart";
 import TotalEmployees from "./TotalEmployee";
 import ClockCards from "./ClockInOut";
@@ -21,9 +19,8 @@ const HrDashboard = () => {
   const { data } = useSelector((state) => state.user);
   const employeeId = data.employee._id;
 
-  const companyId = data.employee.companyID._id
-
-  const workingHoursString = data.employee.companyID.workTimings?.[0]; // e.g., '09:00 - 17:00'
+  const companyId = data.employee.companyID?._id || 0;
+  const workingHoursString = data.employee.companyID?.workTimings?.[0] || 0; // e.g., '09:00 - 17:00'
 
 
   const getworkingtime= (timeRange) => {
@@ -93,7 +90,7 @@ const HrDashboard = () => {
 
 
 
-  const { totalEmployees, genderCounts } = getEmployeeCounts(employeeData.employees);
+  const { totalEmployees, genderCounts } = getEmployeeCounts(employeeData?.employees);
 
   const males = (genderCounts.male / totalEmployees) * 100
   const females = (genderCounts.female / totalEmployees) * 100
