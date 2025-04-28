@@ -34,10 +34,13 @@ const userSlice = createSlice({
         signOutFailure: (state, action) => {
             state.error = action.payload
         },
+        updateCompanyTimings: (state,action)=>{
+            state.data.employee.companyID.workTimings = action.payload;
+        }
 
     },
 })
 
-export const { signInStart, signInSuccess, signInFailure, signOutStart , signOutFailure , signOutSucess
+export const { signInStart, signInSuccess, signInFailure, signOutStart , signOutFailure , signOutSucess , updateCompanyTimings
 } = userSlice.actions;
 export default userSlice.reducer;
