@@ -4,4 +4,3 @@ export const LEAVE_TYPES = [
     { label: "Casual Leave", value: "casual" },
     { label: "Unpaid Leave", value: "unpaid" }
   ];
-  

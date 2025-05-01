@@ -48,7 +48,7 @@ const HRLeaveHistory = () => {
       width: 120,
       renderCell: (params) => (
         <span
-          className={`px-2 py-1 rounded text-white text-xs font-semibold ${
+          className={`px-2 py-1 rounded text-white text-xs ${
             params.value === "APPROVED" ? "bg-green-500" : "bg-red-500"
           }`}
         >
@@ -65,7 +65,7 @@ const HRLeaveHistory = () => {
   });
 
   return (
-    <div className="border border-orange-400 rounded-xl p-4 w-full bg-[#333334] text-white">
+    <div className="border border-amber-600 rounded-xl p-4 w-full bg-[#333334] text-white">
       {/* Top Bar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ const HRLeaveHistory = () => {
                 key={item}
                 onClick={() => setFilter(item)}
                 className={`px-4 py-1 rounded ${
-                  filter === item ? "bg-orange-400 text-black font-bold" : "bg-gray-600"
+                  filter === item ? "bg-amber-600 text-white" : ""
                 }`}
               >
                 {item}
@@ -93,7 +93,7 @@ const HRLeaveHistory = () => {
           placeholder="Employee Search"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="bg-orange-400 text-black placeholder-black font-semibold px-4 py-2 rounded focus:outline-none w-60"
+          className="border border-amber-600 text-white placeholder-white  px-4 py-2 rounded focus:outline-none w-60"
         />
       </div>
 

@@ -1,5 +1,6 @@
 import { FaCalendarTimes, FaCalendarCheck, FaBalanceScale, FaHeartbeat } from "react-icons/fa";
 
+
 const LeaveStats = ({ leaveSummary }) => {
   const stats = [
     { icon: <FaCalendarTimes className="text-red-400 text-3xl" />, value: leaveSummary?.LeavesTaken || 0, label: "Leave Taken" },
