@@ -16,6 +16,7 @@ const HRLeaveRequest = () => {
         const response = await getAllPendingLeaveRequests();
         if (response.success) {
           setLeaveRequests(response.pendingLeaves);
+          console.log(response.pendingLeaves)
         } else {
           console.error("Error fetching leave requests");
         }
@@ -97,7 +98,7 @@ const HRLeaveRequest = () => {
         ) : (
           leaveRequests.map((leave) => (
             <div key={leave.EmployeeID._id} className="grid grid-cols-4 items-center p-3 text-x gap-2">
-              <span className="font-semibold">{leave.EmployeeID.name}</span>
+              <span className="font-semibold">{leave.EmployeeID.firstName}</span>
               <span>{leave.LeaveType} leave</span>
               <span className="font-semibold">{leave.days} day(s)</span>
               <button
