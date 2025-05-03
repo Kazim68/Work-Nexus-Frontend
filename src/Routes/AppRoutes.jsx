@@ -59,7 +59,7 @@ const AppRoutes = () => {
 
                             {/* <Route path="/" element={<HrDashboard />} /> */}
 
-                            {/* <Route path="/" element={<LandingRoutes />} /> */}
+                            <Route path="/" element={<LandingRoutes />} />
 
 
                             <Route path="/signin" element={<SignIn />} />
@@ -74,12 +74,12 @@ const AppRoutes = () => {
 
                             <Route path="/employee-onboarding" element={<EmployeeOnBoard />} />
 
-                        <Route path="/hr-dashboard" element={<HrDashboard />} />
+                            <Route path="/hr-dashboard" element={<HrDashboard />} />
 
-                        <Route path="/payslip" element={<PaySlip />} />
-                        <Route path="/hr-approve-leave" element={<LeaveApproval />} />
+                            <Route path="/payslip" element={<PaySlip />} />
+                            <Route path="/hr-approve-leave" element={<LeaveApproval />} />
 
-                        <Route path="/hr/tickets" element={<TokenDashboard />} />
+                            <Route path="/hr/tickets" element={<TokenDashboard />} />
 
 
 

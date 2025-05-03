@@ -1,68 +1,71 @@
 import React from "react";
-import { FaCalendarAlt, FaEdit } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
+import { FaCalendarAlt } from "react-icons/fa";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const TicketReview = ({ onClose , ticket }) => {
-
+const TicketReview = ({ onClose, ticket }) => {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-GB'); // DD/MM/YYYY
-      };
+        return date.toLocaleDateString('en-GB');
+    };
 
-      
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-[#2e2e2e] text-white border border-orange-500 rounded-lg p-6 w-[600px]">
+        <div className=" fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 backdrop-blur-md transition-opacity duration-300 ease-in-out">
+            <div className="bg-[#212020] text-amber-600 border border-amber-600 rounded-xl shadow-xl w-full max-w-xl p-6 relative">
+                
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-3 text-white hover:text-red-500 text-2xl"
+                    aria-label="Close"
+                >
+                    <IoIosCloseCircleOutline />
+                </button>
+
                 {/* Header */}
-                <div className="flex justify-between mb-4">
-                    <div>
-                        <p>
-                            <span className="text-gray-300">Name - </span>
-                            <span className="text-orange-400 font-semibold">{ticket.EmployeeID.firstName} {ticket.EmployeeID.lastName}</span>
-                        </p>
-                        <p>
-                            <span className="text-gray-300">Employee Code - </span>
-                            <span className="text-orange-400 font-semibold">{ticket.EmployeeID.employeeCode}</span>
-                        </p>
-                    </div>
+                <div className="mb-4 border-b pb-4">
+                    <h2 className="text-lg font-semibold">
+                        {ticket.EmployeeID.firstName} {ticket.EmployeeID.lastName}
+                    </h2>
+                    <p className="text-sm text-white">
+                        Employee Code: <span className="font-medium text-gray-700">{ticket.EmployeeID.employeeCode}</span>
+                    </p>
                 </div>
 
                 {/* Ticket Info */}
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-6 mb-4">
                     <div>
-                        <label className="block mb-1 text-sm">Ticket Type</label>
-                        <div className="bg-orange-500 font-bold py-2 px-3 rounded text-center">{ticket.IssueType}</div>
+                        <p className="text-xs text-white mb-1">Ticket Type</p>
+                        <p className="text-sm font-medium">{ticket.IssueType}</p>
                     </div>
                     <div>
-                        <label className="block mb-1 text-sm">Title</label>
-                        <div className="bg-orange-500 font-bold py-2 px-3 rounded text-center">{ticket.Issue}</div>
+                        <p className="text-xs text-white mb-1">Title</p>
+                        <p className="text-sm font-medium">{ticket.Issue}</p>
                     </div>
                 </div>
 
                 {/* Date */}
                 <div className="mb-4">
-                    <label className="block mb-1 text-sm">Date Of Issue</label>
-                    <div className="bg-orange-500 font-bold py-2 px-3 rounded inline-flex items-center gap-2">
-                        {formatDate(ticket.RaisedDate)} <FaCalendarAlt />
-                    </div>
+                    <p className="text-xs text-white mb-1">Date of Issue</p>
+                    <p className="text-sm font-medium flex items-center gap-2">
+                        {formatDate(ticket.RaisedDate)} <FaCalendarAlt className="text-gray-400" />
+                    </p>
                 </div>
 
-                {/* Details */}
-                <div className="mb-4">
-                    <label className="block mb-1 text-sm">Details</label>
-                    <div className="bg-orange-500 text-black py-3 px-4 rounded relative">
-                        {/* Replace below text with actual details if needed */}
+                {/* Description */}
+                <div className="mb-6">
+                    <p className="text-xs text-white mb-1">Details</p>
+                    <p className="text-sm leading-relaxed text-gray-700 border rounded-md p-3 bg-gray-50">
                         {ticket.Description}
-                    </div>
+                    </p>
                 </div>
 
-                {/* Footer Buttons */}
-                <div className="flex justify-right items-center mt-6">
+                {/* Footer */}
+                <div className="text-right">
                     <Link
-                    to='/hr/tickets'
-                        className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded font-semibold"
+                        to="/hr/tickets"
                         onClick={onClose}
+                        className="inline-block bg-amber-600 hover:bg-amber-700 text-white font-medium px-5 py-2 rounded-md transition-colors"
                     >
                         Proceed
                     </Link>

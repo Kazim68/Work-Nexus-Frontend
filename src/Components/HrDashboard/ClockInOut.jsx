@@ -10,25 +10,25 @@ const Modal = ({ isOpen, onClose, time, onTimeChange, onSubmit }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-80">
-                <h2 className="text-lg font-semibold text-gray-800 mb-4">Edit Time</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 backdrop-blur-md transition-opacity duration-300 ease-in-out">
+            <div className="bg-[#212020] border border-amber-600 rounded-lg p-6 w-80">
+                <h2 className="text-lg font-semibold text-amber-600 mb-4">Edit Time</h2>
                 <input
                     type="time"
                     value={time}
                     onChange={(e) => onTimeChange(e.target.value)}
-                    className="border border-gray-300 rounded w-full p-2 mb-4"
+                    className="border border-amber-600 rounded text-white w-full p-2 mb-4"
                 />
                 <div className="flex justify-end gap-2">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 text-gray-700 border rounded hover:bg-gray-200"
+                        className="px-4 py-2 text-white bg-red-600 rounded-sm cursor-pointer"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={onSubmit}
-                        className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+                        className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 cursor-pointer"
                     >
                         Edit
                     </button>
