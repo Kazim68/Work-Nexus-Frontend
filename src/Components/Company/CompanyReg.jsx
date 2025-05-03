@@ -10,15 +10,15 @@ import ButtonLoader from "../Shared/ButtonLoader";
 const MultiStepForm = () => {
     const { data } = useSelector((state) => state.user);
     const navigate = useNavigate()
-    const [loading , setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (!data || !data.token) {
-          toast.error('Unauthorized, Sign in again');
-          navigate('/signin');
+            toast.error('Unauthorized, Sign in again');
+            navigate('/signin');
         }
-      }, [data, navigate]);
-      
+    }, [data, navigate]);
+
 
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -31,6 +31,7 @@ const MultiStepForm = () => {
         documents: null,
         workStartTime: "",
         workEndTime: "",
+        workingDays :"",
         logo: null,
     });
     const [errors, setErrors] = useState({});
@@ -45,6 +46,9 @@ const MultiStepForm = () => {
         if (!formData.companyAddress || formData.companyAddress.length < 3) newErrors.companyAddress = "Invalid address";
         if (!/^\d+$/.test(formData.employeeCount)) newErrors.employeeCount = "Invalid amount";
         if (!formData.workStartTime || !formData.workEndTime) newErrors.workTimings = "Work timings are required";
+        if (!formData.workingDays) newErrors.workingDays = "Working days are required";
+        if(parseInt(formData.workingDays) > 7 || parseInt(formData.workingDays) < 1) newErrors.workingDays = "Enter valid working days"
+
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -52,7 +56,7 @@ const MultiStepForm = () => {
 
     const validateStep2 = () => {
         const newErrors = {};
-    
+
         // Validate documents
         if (!formData.documents || formData.documents.length === 0) {
         } else {
@@ -64,7 +68,7 @@ const MultiStepForm = () => {
                 newErrors.documents = "Only PDF, JPEG, and PNG files are allowed.";
             }
         }
-    
+
         // Validate logo
         if (!formData.logo || formData.logo.length === 0) {
 
@@ -76,11 +80,11 @@ const MultiStepForm = () => {
                 newErrors.logo = "Only JPEG, and PNG files are allowed for logo.";
             }
         }
-    
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    
+
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -136,13 +140,15 @@ const MultiStepForm = () => {
                 employeeCount: formData.employeeCount,
                 workTimings: [`${formData.workStartTime} - ${formData.workEndTime}`],
                 companyStatus: true,
+                workingDays: formData.workingDays,
+
                 pricingPlan: data.pricingPlan && data.pricingPlan.planType ? data.pricingPlan.planType : 'basic',
 
                 documents: uploadResponse.documents || [],
                 companyLogo: uploadResponse.logo || null,
-                companyAdmin:data.employee._id
+                companyAdmin: data.employee._id
             };
-            
+
 
             await createWithAuth("/company/register", payload, {
                 headers: {
@@ -150,7 +156,7 @@ const MultiStepForm = () => {
                 },
             });
 
-            
+
 
             toast.success("Company registered successfully!");
             setLoading(false)
@@ -164,10 +170,11 @@ const MultiStepForm = () => {
                 documents: null,
                 workStartTime: "",
                 workEndTime: "",
+                workingDays:"",
                 logo: null,
             });
             navigate('/employee-onboarding')
-            
+
         } catch (error) {
             setLoading(false)
 
@@ -272,8 +279,27 @@ const MultiStepForm = () => {
                                     />
                                 </div>
                             </div>
-                            {errors.workTimings && <p className="text-red-500 text-xs ml-1">{errors.workTimings}</p>}
+                            {errors.workTimings && (
+                                <p className="text-red-500 text-xs ml-1">{errors.workTimings}</p>
+                            )}
                         </div>
+
+                        <div className="mb-4">
+                            <label className="block text-white mb-1">Number of Working Days <span className="text-red-600">*</span></label>
+                            <input
+                                type="number"
+                                name="workingDays"
+                                min="1"
+                                max="7"
+                                value={formData.workingDays}
+                                onChange={handleChange}
+                                className="w-full px-5 py-3 rounded-lg font-medium bg-[#212020] border border-amber-600 text-sm text-white focus:outline-none focus:ring focus:ring-amber-600"
+                            />
+                            {errors.workingDays && (
+                                <p className="text-red-500 text-xs ml-1">{errors.workingDays}</p>
+                            )}
+                        </div>
+
 
                         <div className="text-right">
                             <button className="bg-amber-600 hover:bg-amber-700 cursor-pointer text-white px-4 py-2 rounded" onClick={nextStep}>
@@ -326,7 +352,7 @@ const MultiStepForm = () => {
                         />
                         <div className="flex justify-between">
                             <button className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 cursor-pointer" onClick={prevStep}>Previous</button>
-                            <button className="bg-amber-600 hover:bg-amber-600 text-white px-4 py-2 rounded  cursor-pointer" onClick={handleSubmit}> {loading ? <ButtonLoader/> : 'Submit'}</button>
+                            <button className="bg-amber-600 hover:bg-amber-600 text-white px-4 py-2 rounded  cursor-pointer" onClick={handleSubmit}> {loading ? <ButtonLoader /> : 'Submit'}</button>
                         </div>
                     </fieldset>
                 )}

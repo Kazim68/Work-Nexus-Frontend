@@ -64,9 +64,18 @@ const AppRoutes = () => {
 
                             {/* <Route path="/" element={<HrDashboard />} /> */}
 
+
+                            <Route path="/" element={<LandingRoutes />} />
+
+
+                            <Route path="/signin" element={<SignIn />} />
+                            <Route path="/forgot-password" element={<ForgotPassword />} />
+                            <Route path="/recover-password" element={<RecoveredPassword />} />
+
                             
                             <Route path="/forgot-password" element={<ProtectedRoute><ForgotPassword /></ProtectedRoute>} />
                             <Route path="/recover-password" element={<ProtectedRoute><RecoveredPassword /></ProtectedRoute>} />
+
 
 
                             <Route path="/apply-leave" element={<ProtectedRoute><ApplyLeave /></ProtectedRoute>} />
@@ -76,11 +85,20 @@ const AppRoutes = () => {
 
                             <Route path="/employee-onboarding" element={<HrRoute><EmployeeOnBoard /></HrRoute>} />
 
+
+                            <Route path="/hr-dashboard" element={<HrDashboard />} />
+
+                            <Route path="/payslip" element={<PaySlip />} />
+                            <Route path="/hr-approve-leave" element={<LeaveApproval />} />
+
+                            <Route path="/hr/tickets" element={<TokenDashboard />} />
+
                         <Route path="/hr-dashboard" element={<HrRoute><HrDashboard /></HrRoute>} />
 
                         <Route path="/payslip/:employeeId/:year/:month" element={<ProtectedRoute><EmployeePayroll /></ProtectedRoute>} />
 
                         <Route path="/hr-approve-leave" element={<HrRoute><LeaveApproval /></HrRoute>} />
+
 
                         <Route path="/hr/tickets" element={<HrRoute><TokenDashboard /></HrRoute>} />
 

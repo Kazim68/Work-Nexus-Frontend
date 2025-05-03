@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+
 import logo from "../../assets/Landing Page Icons/Work Nexus Logo(cropped) copy.png";
 
 const Navbar = ({ navBg = "transparent", navLinkColor = "text-white" }) => {
@@ -65,16 +66,18 @@ const Navbar = ({ navBg = "transparent", navLinkColor = "text-white" }) => {
                         </Link>
                     ))}
 
-                    <button className="relative bg-orange-500 text-white px-8 py-3 rounded-md hover:bg-[#777987] transition duration-300 font-semibold shadow-md text-lg">
-                        <span className="relative z-10 inline-block text-center w-full">Join Us</span>
-                        <div
-                            className="absolute inset-0 bg-[#777878] rounded-md"
-                            style={{
-                                clipPath: 'polygon(80% 0%, 100% 0%, 100% 100%, 60% 100%)',
-                                left: '40%',
-                            }}
-                        ></div>
-                    </button>
+                    <Link to='/signup'>
+                        <button className="relative bg-orange-500 text-white px-8 py-3 rounded-md hover:bg-[#777987] transition duration-300 font-semibold shadow-md text-lg">
+                            <span className="relative z-10 inline-block text-center w-full">Join Us</span>
+                            <div
+                                className="absolute inset-0 bg-[#777878] rounded-md"
+                                style={{
+                                    clipPath: 'polygon(80% 0%, 100% 0%, 100% 100%, 60% 100%)',
+                                    left: '40%',
+                                }}
+                            ></div>
+                        </button>
+                    </Link>
                 </div>
 
                 {/* Mobile toggle button */}

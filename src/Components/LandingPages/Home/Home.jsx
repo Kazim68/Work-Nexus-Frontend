@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import bgImage from "../../../assets/Landing Page Icons/Background Pics/home page.jpg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [navBg, setNavBg] = useState("bg-transparent");
@@ -60,18 +61,20 @@ const Home = () => {
           Management Solution
         </h2>
 
-        <button className="relative bg-orange-500 text-white w-40 h-12 rounded-md hover:bg-[#777987] transition duration-300 font-semibold shadow-md mt-4">
-          <span className="relative z-10 inline-block text-center w-full text-sm md:text-xl">
-            Get Started
-          </span>
-          <div
-            className="absolute inset-0 bg-[#777878] rounded-md"
-            style={{
-              clipPath: "polygon(80% 0%, 100% 0%, 100% 100%, 60% 100%)",
-              left: "40%",
-            }}
-          ></div>
-        </button>
+        <Link to='/signup'>
+          <button className="relative bg-orange-500 text-white w-40 h-12 cursor-pointer rounded-md hover:bg-[#777987] transition duration-300 font-semibold shadow-md mt-4">
+            <span className="relative z-10 inline-block text-center w-full text-sm md:text-xl">
+              Get Started
+            </span>
+            <div
+              className="absolute inset-0 bg-[#777878] rounded-md"
+              style={{
+                clipPath: "polygon(80% 0%, 100% 0%, 100% 100%, 60% 100%)",
+                left: "40%",
+              }}
+            ></div>
+          </button>
+        </Link>
       </div>
 
       {/* Bottom Text */}

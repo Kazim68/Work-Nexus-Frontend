@@ -48,6 +48,8 @@ const EmployeeOnBoard = () => {
         "Role",
         "Employee_Code",
         "Department",
+        "Designation",
+        "Salary"
       ];
 
       const errors = [];
@@ -79,7 +81,6 @@ const EmployeeOnBoard = () => {
         }
 
         const empCode = row["Employee_Code"];
-        console.log(empCode)
         if (emp.has(empCode)) {
           errors.push(`Row ${rowNumber}: Duplicate Employee code "${row["Employee_Code"]}"`);
         } else {

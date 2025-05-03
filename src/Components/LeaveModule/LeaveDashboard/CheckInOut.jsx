@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const CheckInOut = ({ today }) => {
+const CheckInOut = ({ today , onSuccess  }) => {
   const { data } = useSelector((state) => state.user);
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -45,6 +45,7 @@ const CheckInOut = ({ today }) => {
         },
       });
       toast.success("Clock-in successful!");
+      onSuccess?.();
     } catch (error) {
       toast.error(error.message || "Clock-in failed.");
     } finally {
@@ -63,6 +64,7 @@ const CheckInOut = ({ today }) => {
         },
       });
       toast.success("Clock-out successful!");
+      onSuccess?.();
     } catch (error) {
       console.error(error)
       toast.error(error.message || "Clock-out failed.");

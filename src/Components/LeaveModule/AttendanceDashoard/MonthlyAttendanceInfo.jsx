@@ -7,8 +7,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const MAX_DAYS_IN_MONTH = 31; // Max days in a month
 const DEFAULT_ABSENT_HOURS = 8;
 
-const MonthlyAttendanceInfo = ({ thisMonthData = {}, previousMonth = {} }) => {
+const MonthlyAttendanceInfo = ({ thisMonthData , previousMonth }) => {
   const [selectedMonth, setSelectedMonth] = useState("current");
+  
 
   const currentDate = new Date();
   const currentDay = currentDate.getDate(); // Get today's day (1-31)
