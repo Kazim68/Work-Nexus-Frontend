@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Layout from '../../Layout/Layout'
 import LeaveStats from './LeaveStats'
 import CheckInOut from './CheckInOut'
@@ -10,11 +10,13 @@ import Loader from '../../Shared/Loader'
 import { toast } from 'react-toastify'
 import MonthlyAttendanceInfo from '../AttendanceDashoard/MonthlyAttendanceInfo'
 import { fetchOne } from '../../../Api/Api'
+import { getLeaveSummary } from '../../../Api/Employee/Leaves';
 
 
 const Main = () => {
 
     const { data } = useSelector((state) => state.user);
+    const [leaveSummary, setLeaveSummary] = useState([]);
     const employeeId = data.employee._id;
     const workingHoursString = data.employee.companyID.workTimings?.[0]; // e.g., '09:00 - 17:00'
 
@@ -29,6 +31,19 @@ const Main = () => {
         staleTime: 0,
         cacheTime: 0,
     });
+
+    useEffect(() => { 
+        const fetchLeaveSummary = async () => {
+            try {
+                const response = await getLeaveSummary(employeeId);
+                setLeaveSummary(response.leaveSummary);
+            } catch (error) {
+                console.error('Error fetching leave summary:', error);
+            }
+        };
+
+        fetchLeaveSummary(); 
+    }, [])
 
     if (isLoading) return (
         <div className="flex items-center justify-center h-screen">
@@ -49,7 +64,7 @@ const Main = () => {
                     <CheckInOut today={attendanceData.today} onSuccess={refetch} />
                 </div>
                 <div className="w-full grid grid-cols-1 gap-4 leave-stats-container">
-                    <LeaveStats />
+                    <LeaveStats leaveSummary={leaveSummary}/>
                 </div>
 
                 <style>

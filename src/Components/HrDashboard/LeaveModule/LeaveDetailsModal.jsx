@@ -34,8 +34,7 @@ const LeaveDetailsModal = ({ isOpen, onClose, leave, onApprove, onReject, approv
 
                 {/* Employee Info */}
                 <div className="space-y-2 mb-6">
-                    <div><span className="font-semibold">Name - </span><span className="text-orange-400">{leave.EmployeeID.name}</span></div>
-                    <div><span className="font-semibold">Designation - </span>{leave.EmployeeID.designation || "N/A"}</div>
+                    <div><span className="font-semibold">Name - </span><span className="text-orange-400">{leave.EmployeeID.firstName}</span></div>
                     <div><span className="font-semibold">Employee ID - </span><span className="text-orange-400">{leave.EmployeeID.employeeCode || "N/A"}</span></div>
                     <div><span className="font-semibold">Department - </span>{leave.EmployeeID.department || "N/A"}</div>
                 </div>
