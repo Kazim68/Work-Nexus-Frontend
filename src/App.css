@@ -2,5 +2,20 @@
 
 body{
     background-color: #212020;
-
 }
+
+
+/* Add this in your global CSS (e.g., index.css or tailwind.css) */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #5a5858;
+    border-radius: 4px;
+  }
+  

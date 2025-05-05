@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { Links, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { create } from "../../../Api/Api"; // Import the generalized API function
 import { toast } from "react-toastify"; // For notifications
@@ -248,9 +248,9 @@ const Signup = () => {
 
                                 <p className="mt-3 text-xs text-gray-600 text-center">
                                     Already have an account?{" "}
-                                    <a href="">
+                                    <Link to='/signin'>
                                         <span className="text-amber-600 font-semibold hover:underline">Sign in</span>
-                                    </a>
+                                    </Link>
                                 </p>
                             </div>
                         </div>

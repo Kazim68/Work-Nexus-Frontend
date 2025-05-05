@@ -4,6 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Work_Nexus_Logo from '../../assets/Landing Page Icons/Work_Nexus_Logo.png';
 import { getUserInfo } from '../../utils/getUserInfo.js';
+import { useSelector } from "react-redux";
 
 const Navbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = ({ toggleSidebar }) => {
     setDropdownOpen(false); // Close dropdown after navigation
   };
 
-  const userInfo = getUserInfo(); 
+  const { data } = useSelector((state) => state.user);
 
   return (
     <div className="fixed top-0 left-0 w-full p-4 flex items-center justify-between z-50 shadow-md">
@@ -37,7 +38,7 @@ const Navbar = ({ toggleSidebar }) => {
           onClick={() => setDropdownOpen(!dropdownOpen)}
           className="flex items-center space-x-2 text-amber-600 focus:outline-none"
         >
-          <span>Hi, {userInfo?.employee?.name}</span>
+          <span>Hi, {data?.employee?.firstName} {data?.employee?.lastName}</span>
           <FaChevronDown className="text-amber-600" />
           <img
             src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
