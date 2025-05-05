@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Create an axios instance with a base URL (replace with your actual API URL)
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000/api", // Replace with your API base URL
+  //baseURL: "http://localhost:3000/api", // Replace with your API base URL
+  baseURL: "https://work-nexus-backend.vercel.app",
 });
 
 // Fetch all data from a given URL
