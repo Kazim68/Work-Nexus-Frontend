@@ -5,7 +5,7 @@ import { getUserInfo } from '../utils/getUserInfo.js';
 // Create an Axios instance
 const api = axios.create({
   //baseURL: 'http://localhost:3000/api', // Replace with your API base URL
-  baseURL: 'https://work-nexus-backend.vercel.app/api',
+  baseURL: 'https://work-nexus-backend-production.up.railway.app/api',
 });
 
 // You can add request interceptors to handle common tasks like adding tokens to headers
