@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-const AdminRoutes = () => {
+const AdminRoutes = ({ children }) => {
 
     const { data } = useSelector((state) => state.user);
     const role = data?.employee?.userRole;
