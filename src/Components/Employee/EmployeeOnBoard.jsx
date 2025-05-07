@@ -20,7 +20,7 @@ const EmployeeOnBoard = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [blobUrl, setBlobUrl] = useState(null);
-  const companyId = data?.employee?.companyID;
+  const companyId = data?.employee?.companyID._id;
   const token = data?.token;
 
   const handleFileChange = async (e) => {
