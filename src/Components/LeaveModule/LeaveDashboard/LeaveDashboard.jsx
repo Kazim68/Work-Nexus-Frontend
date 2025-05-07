@@ -61,7 +61,7 @@ const Main = () => {
         <Layout>
             <div className="flex flex-col gap-4 w-full dashboard-layout">
                 <div className="w-full flex justify-center checkinout-container">
-                    <CheckInOut today={attendanceData.today} onSuccess={refetch} />
+                    <CheckInOut today={attendanceData?.today} onSuccess={refetch} />
                 </div>
                 <div className="w-full grid grid-cols-1 gap-4 leave-stats-container">
                     <LeaveStats leaveSummary={leaveSummary}/>
