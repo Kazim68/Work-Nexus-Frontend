@@ -85,7 +85,7 @@ const AppRoutes = () => {
 
 
 
-                            <Route path="/employee-onboarding" element={<HrRoute><EmployeeOnBoard /></HrRoute>} />
+                            <Route path="/employee-onboarding" element={<AdminRoutes><EmployeeOnBoard /></AdminRoutes>} />
 
 
                             <Route path="/hr-dashboard" element={<HrDashboard />} />
