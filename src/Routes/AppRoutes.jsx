@@ -34,6 +34,8 @@ import { NotificationProvider } from '../contexts/NotificationContext.jsx';
 
 import ProtectedRoute from './ProtectedRoutes.jsx';
 import HrRoute from './HrRoutes.jsx';   
+import OTPRoute from './OTPRoute.jsx';
+import AdminRoutes from './AdminRoutes.jsx';
 
 
 const AppRoutes = () => {
@@ -47,12 +49,12 @@ const AppRoutes = () => {
                             <Route path="/signup" element={<SignUp />} />
                             <Route path="/signin" element={<SignIn />} />
 
-                            <Route path="/verify" element={<HrRoute><OTPVerification /></HrRoute>} />
-                            <Route path="/update-email" element={<HrRoute><NewMail /></HrRoute>} />
+                            <Route path="/verify" element={<OTPRoute><OTPVerification /></OTPRoute>} />
+                            <Route path="/update-email" element={<NewMail />} />
 
-                            <Route path="/orgInfo" element={<HrRoute><CompanyReg /></HrRoute>} />
-                            <Route path="/pricing-plan" element={<HrRoute><PricingPlan /></HrRoute>} />
-                            <Route path="/payment" element={<HrRoute><PaymentSetup /></HrRoute>} />
+                            <Route path="/orgInfo" element={<AdminRoutes><CompanyReg /></AdminRoutes>} />
+                            <Route path="/pricing-plan" element={<AdminRoutes><PricingPlan /></AdminRoutes>} />
+                            <Route path="/payment" element={<AdminRoutes><PaymentSetup /></AdminRoutes>} />
 
 
 
@@ -74,7 +76,7 @@ const AppRoutes = () => {
 
                             
                             <Route path="/forgot-password" element={<ProtectedRoute><ForgotPassword /></ProtectedRoute>} />
-                            <Route path="/recover-password" element={<ProtectedRoute><RecoveredPassword /></ProtectedRoute>} />
+                            <Route path="/recover-password" element={<RecoveredPassword />} />
 
 
 

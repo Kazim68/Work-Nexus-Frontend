@@ -35,14 +35,19 @@ const SignIn = () => {
                 toast.success("Login successful!");
 
                 console.log(response.data.employee.userRole)
-                if (response.data.pricingPlan == null && response.data.employee.userRole == 'admin') {
-                    navigate("/pricing-plan")
+                localStorage.setItem('role' , response.data.employee.userRole)
+                if (response.data.employee.userRole == 'admin') {
+                    if (response.data.pricingPlan == null) {
+                        navigate("/pricing-plan")
 
-                } else if (!response.data.employee.companyID && response.data.employee.userRole == 'admin') {
-                    navigate("/orgInfo")
+                    } else if (!response.data.employee.companyID) {
+                        navigate("/orgInfo")
 
-                } else if (response.data.companyEmployeeCount <=1 && response.data.employee.userRole == 'admin') {
-                    navigate("/employee-onboarding")
+                    } else if (response.data.companyEmployeeCount <= 1) {
+                        navigate("/employee-onboarding")
+                    } else {
+                        navigate("/employee-onboarding")
+                    }
                 }
                 else {
                     navigate("/attendance-dashboard")

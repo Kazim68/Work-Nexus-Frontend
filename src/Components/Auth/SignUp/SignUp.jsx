@@ -74,9 +74,8 @@ const Signup = () => {
             await create("/otp/sendotp", { email: formData.email });
             localStorage.setItem("email", formData.email);
             localStorage.setItem("employeee_id", response.data.employeeId);
-
-
             navigate("/verify");
+        
         } catch (error) {
             toast.error(error.message || "Something went wrong.");
             setIsSubmitting(false);
