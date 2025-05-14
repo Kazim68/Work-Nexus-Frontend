@@ -85,13 +85,14 @@ const PricingPlan = () => {
   };
 
   const handleProceed = async (amount, name) => {
+
+    console.log(amount , name)
     try {
       const res = await createWithAuth('/payment/create-checkout-session', { amount: amount, employeeId: employeeId, planType: name }, {
         headers: {
           Authorization: `Bearer ${data.token}`,
         }
       });
-      console.log(res)
       window.location.href = res.data.url; // redirect to Stripe
     } catch (err) {
       console.error('Checkout error:', err);
@@ -118,7 +119,7 @@ const PricingPlan = () => {
           <li className="flex items-center gap-2">✓ HR Dashboards & Charts</li>
           <li className="flex items-center gap-2">✓ No recurring charges</li>
         </ul>
-        <button onClick={()=>handleProceed('premium' , 500)} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
+        <button onClick={()=>handleProceed(500 , 'premium')} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
           Pay Now
         </button>
       </div>
