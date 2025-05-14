@@ -100,15 +100,15 @@ const PricingPlan = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-12">
-      <div className="bg-gray-900 text-white rounded-2xl p-10 max-w-md w-full shadow-2xl border border-gray-700">
+    <section className="min-h-screen flex items-center justify-center bg-[#212020] px-4 py-12">
+      <div className="bg-[#212020] text-white rounded-2xl p-10 max-w-md w-full shadow-2xl border border-amber-600">
         <h1 className="text-3xl font-bold text-center mb-4">Pay As You Go</h1>
-        <p className="text-center text-gray-400 mb-6">
+        <p className="text-center text-white mb-6">
           One-time access to the full system. No subscriptions. No hidden fees.
         </p>
         <div className="text-center mb-8">
-          <span className="text-5xl font-extrabold text-green-500">$5</span>
-          <p className="text-gray-400 text-sm mt-1">One-time payment</p>
+          <span className="text-5xl font-extrabold text-amber-600">$500</span>
+          <p className="text-white text-sm mt-1">One-time payment</p>
         </div>
         <ul className="text-sm text-gray-300 space-y-3 mb-8">
           <li className="flex items-center gap-2">✓ Full access to all features</li>
@@ -117,7 +117,7 @@ const PricingPlan = () => {
           <li className="flex items-center gap-2">✓ HR Dashboards & Charts</li>
           <li className="flex items-center gap-2">✓ No recurring charges</li>
         </ul>
-        <button onClick={()=>handleProceed('premium' , 1000)} className="w-full py-3 bg-green-600 hover:bg-green-700 transition rounded-lg font-semibold text-white">
+        <button onClick={()=>handleProceed('premium' , 1000)} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
           Pay Now
         </button>
       </div>
