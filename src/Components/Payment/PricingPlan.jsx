@@ -117,7 +117,7 @@ const PricingPlan = () => {
           <li className="flex items-center gap-2">✓ HR Dashboards & Charts</li>
           <li className="flex items-center gap-2">✓ No recurring charges</li>
         </ul>
-        <button onClick={()=>handleProceed('premium' , 1000)} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
+        <button onClick={()=>handleProceed('Premium' , 500)} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
           Pay Now
         </button>
       </div>
