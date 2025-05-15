@@ -90,7 +90,7 @@ const AppRoutes = () => {
 
                             <Route path="/hr-dashboard" element={<HrDashboard />} />
 
-                            <Route path="/payslip" element={<PaySlip />} />
+                            <Route path="/payroll" element={<PaySlip />} />
                             <Route path="/hr-approve-leave" element={<LeaveApproval />} />
 
                             <Route path="/hr/tickets" element={<TokenDashboard />} />
