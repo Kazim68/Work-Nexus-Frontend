@@ -4,13 +4,21 @@ import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Work_Nexus_Logo from '../../assets/Landing Page Icons/Work_Nexus_Logo.png';
 import { getUserInfo } from '../../utils/getUserInfo.js';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {signOutSucess} from '../../Redux/UserSlice.js'
 
 const Navbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   const handleNavigation = (path) => {
+    navigate(path);
+    setDropdownOpen(false); // Close dropdown after navigation
+  };
+
+  const handleLogout = (path) => {
+    dispatch(signOutSucess())
     navigate(path);
     setDropdownOpen(false); // Close dropdown after navigation
   };
@@ -52,15 +60,21 @@ const Navbar = ({ toggleSidebar }) => {
           <div className="absolute right-0 mt-2 w-48 shadow-lg rounded-lg border">
             <button
               onClick={() => handleNavigation("/profile-setting")}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-100"
+              className="block w-full text-left px-4 py-2 text-amber-600 hover:bg-amber-100"
             >
               My Profile
             </button>
             <button
               onClick={() => handleNavigation("/forgot-password")}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+              className="block w-full text-left px-4 py-2 text-amber-600 hover:bg-gray-100"
             >
               Forgot Password
+            </button>
+            <button
+              onClick={() => handleLogout("/signin")}
+              className="block w-full text-left px-4 py-2 text-amber-600 hover:bg-gray-100"
+            >
+              Logout
             </button>
           </div>
         )}
