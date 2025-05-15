@@ -85,7 +85,8 @@ const PricingPlan = () => {
   };
 
   const handleProceed = async (amount, name) => {
-    console.log(amount)
+
+    console.log(amount , name)
     try {
       const res = await createWithAuth('/payment/create-checkout-session', { amount: amount, employeeId: employeeId, planType: name }, {
         headers: {
@@ -101,56 +102,26 @@ const PricingPlan = () => {
   };
 
   return (
-    <section className="min-h-screen grid place-items-center px-4 py-8">
-      <div className="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
-        {plans.map((plan, index) => (
-          <div
-            key={index}
-            className="relative w-[300px] p-6 pb-20 rounded-md border text-center transition-all hover:-translate-y-2 hover:scale-[1.015] hover:bg-opacity-50 hover:shadow-lg"
-            style={{
-              borderColor: plan.color,
-              backgroundColor: "rgba(38, 38, 38, 0.125)",
-            }}
-          >
-            <div className="mb-6">
-              <h4 className="text-xl font-semibold" style={{ color: plan.color }}>
-                {plan.title}
-              </h4>
-              <p className="text-xs text-gray-400">{plan.subtitle}</p>
-            </div>
-
-            <p
-              className="text-[40px] font-bold mb-6 relative"
-              style={{ color: plan.color }}
-            >
-              ${plan.price}
-              <sub className="absolute bottom-1 text-xs text-gray-400 font-light">
-                /month
-              </sub>
-            </p>
-
-            <ul className="text-left mb-6 space-y-3 text-sm">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="text-gray-400">
-                  <FaCheck className="inline text-white mr-2" />
-                  <strong className="text-white">{feature}</strong>
-                </li>
-              ))}
-            </ul>
-
-            <button
-              className="absolute bottom-6 left-1/2 cursor-pointer transform -translate-x-1/2 w-40 py-2 rounded border text-sm font-semibold"
-              style={{
-                backgroundColor: plan.color,
-                borderColor: plan.color,
-                color: "#e4e4e7",
-              }}
-              onClick={() => handleProceed(plan.price, plan.title.toLowerCase())}
-            >
-              SELECT
-            </button>
-          </div>
-        ))}
+    <section className="min-h-screen flex items-center justify-center bg-[#212020] px-4 py-12">
+      <div className="bg-[#212020] text-white rounded-2xl p-10 max-w-md w-full shadow-2xl border border-amber-600">
+        <h1 className="text-3xl font-bold text-center mb-4">Pay As You Go</h1>
+        <p className="text-center text-white mb-6">
+          One-time access to the full system. No subscriptions. No hidden fees.
+        </p>
+        <div className="text-center mb-8">
+          <span className="text-5xl font-extrabold text-amber-600">$500</span>
+          <p className="text-white text-sm mt-1">One-time payment</p>
+        </div>
+        <ul className="text-sm text-gray-300 space-y-3 mb-8">
+          <li className="flex items-center gap-2">✓ Full access to all features</li>
+          <li className="flex items-center gap-2">✓ Attendance & Leave Management</li>
+          <li className="flex items-center gap-2">✓ Payroll System</li>
+          <li className="flex items-center gap-2">✓ HR Dashboards & Charts</li>
+          <li className="flex items-center gap-2">✓ No recurring charges</li>
+        </ul>
+        <button onClick={()=>handleProceed(500 , 'premium')} className="w-full py-3 cursor-pointer bg-amber-600 hover:bg-amber-700 transition rounded-lg font-semibold text-white">
+          Pay Now
+        </button>
       </div>
     </section>
   );
