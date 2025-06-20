@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from "../../../assets/Landing Page Icons/Work Nexus Logo(cropped) copy.png";
+const logo = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Work%20Nexus%20Logo(cropped)%20copy.png";
 
 const Navbar = () => {
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);

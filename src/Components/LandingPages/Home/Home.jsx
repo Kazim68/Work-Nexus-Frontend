@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import bgImage from "../../../assets/Landing Page Icons/Background Pics/home page.jpg";
+const bgImage = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/home%20page.jpg";
 import { Link } from "react-router-dom";
 
 const Home = () => {

@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from '../Navbar';
 
-import logo from '../../../assets/Landing Page Icons/Work Nexus Logo(cropped) copy.png';
-import bgContact from '../../../assets/Landing Page Icons/Background Pics/5-Common-HR-Challenges-1024x532.jpg';
+const logo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Work%20Nexus%20Logo(cropped)%20copy.png';
+const bgContact = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/5-Common-HR-Challenges-1024x532.jpg';
 
-import homeLogo from '../../../assets/Landing Page Icons/About Us/home.png';
-import modulesLogo from '../../../assets/Landing Page Icons/About Us/3d-design.png';
-import servicesLogo from '../../../assets/Landing Page Icons/About Us/public-service.png';
-import aimLogo from '../../../assets/Landing Page Icons/About Us/goal.png';
+const homeLogo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/About%20Us/home.png';
+const modulesLogo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/About%20Us/3d-design.png';
+const servicesLogo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/About%20Us/public-service.png';
+const aimLogo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/About%20Us/goal.png';
 
 import { Mail, Phone } from 'lucide-react';
 

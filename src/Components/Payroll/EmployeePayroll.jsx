@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../Layout/Layout'
-import bgImg from '../../assets/Landing Page Icons/Background Pics/2052-3-1.jpg'
+const bgImg = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/2052-3-1.jpg'
 import { FaPrint } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { FaRegFilePdf } from 'react-icons/fa6'

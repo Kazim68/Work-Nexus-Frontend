@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Work_Nexus_Logo from '../../assets/Landing Page Icons/Work_Nexus_Logo.png';
+const Work_Nexus_Logo = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Work_Nexus_Logo.png';
 import { getUserInfo } from '../../utils/getUserInfo.js';
 import { useSelector, useDispatch } from "react-redux";
 import {signOutSucess} from '../../Redux/UserSlice.js'

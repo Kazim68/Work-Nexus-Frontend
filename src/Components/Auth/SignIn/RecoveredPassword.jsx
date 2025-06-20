@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import keyIcon from "../../../assets/images/key.png";
+const keyIcon = "https://d194k6uxa928vc.cloudfront.net/assets/images/key.png";
 import { toast } from 'react-toastify';
 import { useQuery } from "@tanstack/react-query";
 import { create, fetchWithQueryParams } from '../../../Api/Api';

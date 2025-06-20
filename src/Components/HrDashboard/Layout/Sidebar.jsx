@@ -8,7 +8,7 @@ import {
   MdOutlineWork, MdKeyboardArrowDown, MdKeyboardArrowUp,
 } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
-import logo from "../../../assets/Landing Page Icons/HRM-Logo.png"
+const logo = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/HRM-Logo.png"
 
 const menuItems = [
   { name: "Dashboard", icon: <FaThLarge />, link: "/hr-dashboard" },

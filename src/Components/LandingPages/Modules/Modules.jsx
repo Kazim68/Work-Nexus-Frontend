@@ -1,13 +1,13 @@
 // Modules.jsx
 import React from "react";
 
-import HrManagement from "../../../assets/Landing Page Icons/Modules Icons/hr (3).png";
-import PayrollGeneration from "../../../assets/Landing Page Icons/Modules Icons/salary (1).png";
-import EmployeeManagement from "../../../assets/Landing Page Icons/Modules Icons/employee.png";
-import AttendenceAndLeaveSystem from "../../../assets/Landing Page Icons/Modules Icons/leave.png";
-import ReportGeneration from "../../../assets/Landing Page Icons/Modules Icons/hr (2).png";
-import HelpDesk from "../../../assets/Landing Page Icons/Modules Icons/help-desk.png";
-import ModuleImg from "../../../assets/Landing Page Icons/Background Pics/66574.png";
+const HrManagement = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/hr%20(3).png";
+const PayrollGeneration = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/salary%20(1).png";
+const EmployeeManagement = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/employee.png";
+const AttendenceAndLeaveSystem = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/leave.png";
+const ReportGeneration = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/hr%20(2).png";
+const HelpDesk = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Modules%20Icons/help-desk.png";
+const ModuleImg = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/66574.png";
 
 import Navbar from "../Navbar";
 
