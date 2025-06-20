@@ -1,6 +1,6 @@
 # **Work Nexus**  
 
-A **serverless** HR and Payroll management system built using the **MERN stack** and **AWS tools**. This cloud-based SaaS solution automates payroll processing, employee management, and compliance tracking while leveraging **AWS Lambda, DynamoDB, S3, API Gateway**, and other AWS services for scalability and efficiency.  
+An HR and Payroll management system built using the **MERN stack** and **AWS tools**. This cloud-based SaaS solution automates payroll processing, employee management, and compliance tracking while leveraging **AWS EC2, AWS Amplify, S3 Bucket, and AWS Cloudfront**, for scalability and efficiency.  
 
 ## **Features**  
 ✅ **Employee Management** – Add, edit, and manage employee records, roles, and departments.  
@@ -9,15 +9,13 @@ A **serverless** HR and Payroll management system built using the **MERN stack**
 ✅ **Role-Based Access Control (RBAC)** – Secure authentication and authorization for different user roles.  
 ✅ **Real-Time Notifications** – Email/SMS alerts for salary slips, approvals, and reminders.  
 ✅ **Secure Data Storage** – Uses AWS **S3 and DynamoDB** for scalable data storage.  
-✅ **Serverless Architecture** – Powered by **AWS Lambda, API Gateway**, and other AWS tools.  
 
 ## **Tech Stack**  
 **Frontend:** React.js, Tailwind CSS  
-**Backend:** Node.js, Express.js, AWS Lambda  
-**Database:** DynamoDB  
-**Storage:** AWS S3  
-**Authentication:** AWS Cognito / Firebase Auth  
-**Deployment:** AWS Amplify / AWS Lambda  
+**Backend:** Node.js, Express.js, AWS EC2 
+**Database:** MongoDB  
+**Storage:** AWS S3 + CloudFront  
+**Deployment:** AWS Amplify (Frontend) / AWS EC2 (Backend)  
 
  
 
@@ -26,7 +24,7 @@ A **serverless** HR and Payroll management system built using the **MERN stack**
 ### **Prerequisites**  
 - Node.js (>= 18.x)  
 - AWS CLI configured  
-- MongoDB Atlas account (if using MongoDB instead of DynamoDB)  
+- MongoDB Atlas account
 - AWS Account with IAM permissions  
 
 ### **1. Clone the Repository**  
