@@ -1,5 +1,5 @@
 import React from 'react';
-import bgAim from '../../../assets/Landing Page Icons/Background Pics/2052-3-1.jpg';
+const bgAim = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/2052-3-1.jpg';
 import Navbar from "../Navbar";
 
 const Aim = () => {

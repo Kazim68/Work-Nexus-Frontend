@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import contactFrame from "../../assets/images/contactframe.png";
-import designationImg from "../../assets/images/designation.png";
-import itDepartmentImg from "../../assets/images/itdepartment.png";
-import startDateImg from "../../assets/images/startdate.png";
+const contactFrame = "https://d194k6uxa928vc.cloudfront.net/assets/images/contactframe.png";
+const designationImg = "https://d194k6uxa928vc.cloudfront.net/assets/images/designation.png";
+const itDepartmentImg = "https://d194k6uxa928vc.cloudfront.net/assets/images/itdepartment.png";
+const startDateImg = "https://d194k6uxa928vc.cloudfront.net/assets/images/startdate.png";
 
 const EmployeeDetails = () => {
   const { data } = useSelector((state) => state.user);

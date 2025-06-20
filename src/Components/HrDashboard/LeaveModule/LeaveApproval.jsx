@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../Layout/Layout';
-import bgImg from "../../../assets/Landing Page Icons/Background Pics/2052-3-1.jpg";
+const bgImg = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/2052-3-1.jpg";
 import TopBar from '../TopBar';
 import HRLeaveRequest from './HRLeaveRequest';
 import HRTotalLeavesDetails from './HRTotalLeavesDetails';

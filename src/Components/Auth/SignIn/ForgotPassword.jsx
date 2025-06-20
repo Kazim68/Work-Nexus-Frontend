@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LockIcon from "../../../assets/images/lock.png";
+const LockIcon = "https://d194k6uxa928vc.cloudfront.net/assets/images/lock.png";
 import { toast } from "react-toastify";
 import { create } from "../../../Api/Api";
 import ButtonLoader from "../../Shared/ButtonLoader";

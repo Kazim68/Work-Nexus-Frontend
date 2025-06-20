@@ -1,7 +1,7 @@
 // src/components/TopBar.js
 import React from "react";
 import { useLocation } from "react-router-dom"; // To detect current route
-import profileImg from "../../assets/Landing Page Icons/profile.png"; // Update your path
+const profileImg = "https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/profile.png"; // Update your path
 
 const TopBar = () => {
   const location = useLocation();

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInStart, signInFailure, signInSuccess } from "../../../Redux/UserSlice";
 import ButtonLoader from "../../Shared/ButtonLoader";
-import signin_illustration from "../../../assets/images/signin_illustration.png";
+const signin_illustration = "https://d194k6uxa928vc.cloudfront.net/assets/images/signin_illustration.png";
 import { FaSignInAlt } from "react-icons/fa";
 
 const SignIn = () => {

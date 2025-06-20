@@ -1,8 +1,8 @@
 import React from 'react';
-import bgServices from '../../../assets/Landing Page Icons/Background Pics/HA21-04.png';
-import service1 from '../../../assets//Landing Page Icons/1illustration-graphic-cartoon-character-of-team-work-free-vector.png';
-import service2 from '../../../assets/Landing Page Icons/istockphoto-1134102363-612x612.jpg';
-import checkmark from '../../../assets//Landing Page Icons/Check.svg.png';
+const bgServices = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Background%20Pics/HA21-04.png';
+const service1 = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/1illustration-graphic-cartoon-character-of-team-work-free-vector.png';
+const service2 = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/istockphoto-1134102363-612x612.jpg';
+const checkmark = 'https://d194k6uxa928vc.cloudfront.net/assets/Landing%20Page%20Icons/Check.svg.png';
 import Navbar from "../Navbar";
 
 const Services = () => {
