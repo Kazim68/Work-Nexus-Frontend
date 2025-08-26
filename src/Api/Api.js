@@ -3,8 +3,8 @@ import axios from "axios";
 // Create an axios instance with a base URL (replace with your actual API URL)
 const apiClient = axios.create({
   //baseURL: "http://localhost:3000/api", // Replace with your API base URL
-  //baseURL: "https://work-nexus-backend-production.up.railway.app/api",
-  baseURL: "http://13.61.175.218:3000/api",  // deployed on AWS EC2 instance
+  baseURL: "https://work-nexus-backend-production.up.railway.app/api",
+  //baseURL: "http://13.61.175.218:3000/api",  // deployed on AWS EC2 instance
 });
 
 // Fetch all data from a given URL
