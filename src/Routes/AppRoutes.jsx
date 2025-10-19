@@ -41,7 +41,7 @@ import AdminRoutes from './AdminRoutes.jsx';
 const AppRoutes = () => {
     return (
         <>
-            <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+            <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "203409941377-vj8kccvd56vhj48fkmc1nkbe6lcrojb9.apps.googleusercontent.com"}>
                 <NotificationProvider>
                     <BrowserRouter>
                         <Routes>
